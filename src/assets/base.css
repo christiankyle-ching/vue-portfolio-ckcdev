@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "Poppins", sans-serif;
   font-size: 18px;
@@ -40,7 +44,35 @@ h6 {
 /* --- Components --- */
 
 .card {
-  @apply rounded-[3rem] overflow-hidden p-6;
+  @apply rounded-[3rem] overflow-hidden p-6 relative min-h-[10rem];
+  @apply flex flex-col justify-between items-stretch;
+  @apply transition-all duration-700;
+
+  /* Inactive */
+  @apply scale-75 opacity-0;
+}
+
+.card.active {
+  @apply scale-100 opacity-100;
+}
+
+.card.active:hover {
+  @apply scale-95;
+}
+
+.card__background {
+  @apply absolute top-0 left-0 right-0 bottom-0 -z-10;
+  @apply transition-all duration-500;
+}
+
+.card--background-hover.active > header,
+.card--background-hover.active > footer {
+  @apply transition-all;
+}
+
+.card--background-hover.active:hover > header,
+.card--background-hover.active:hover > footer {
+  @apply opacity-0;
 }
 
 /* --- Animations --- */

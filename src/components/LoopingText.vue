@@ -1,5 +1,5 @@
 <template>
-  <div ref="container" class="whitespace-nowrap flex gap-4">
+  <div ref="container" class="whitespace-nowrap flex">
     <span ref="textContainer" id="textContainer" class="block">
       <slot></slot>
     </span>
@@ -13,6 +13,9 @@ export default {
     return {
       textEl: null,
       textElCopy: null,
+
+      x: 0,
+      currentTick: 0,
     };
   },
   mounted() {
@@ -27,6 +30,20 @@ export default {
 
     this.$refs.textContainer.style.animationDuration = `${totalDuration}ms`;
     this.$refs.textContainer2.style.animationDuration = `${totalDuration}ms`;
+
+    // const fps = 60;
+    // const tick = 1000 / fps;
+    // const totalTicks = (totalDuration / 1000) * fps;
+    // const xPerTick = 100 / totalTicks;
+
+    // setInterval(() => {
+    //   this.$refs.textContainer.style.transform = `translate(-${this.x}%, 0%) translate3d(0px,0px,0px)`;
+    //   this.$refs.textContainer2.style.transform = `translate(-${this.x}%, 0%) translate3d(0px,0px,0px)`;
+
+    //   this.x = this.currentTick * xPerTick;
+    //   this.currentTick =
+    //     this.currentTick > totalTicks ? 0 : this.currentTick + 1;
+    // }, tick);
   },
 };
 </script>
@@ -39,11 +56,11 @@ export default {
 
 @keyframes ltr {
   0% {
-    transform: translateX(0);
+    transform: translateX(0%) translate3d(0px, 0px, 0px);
   }
 
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-100%) translate3d(0px, 0px, 0px);
   }
 }
 </style>
