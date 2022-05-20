@@ -4,15 +4,23 @@
       <slot></slot>
     </span>
     <span ref="textContainer2" id="textContainer2" class="block"></span>
+    <span ref="textContainer3" id="textContainer2" class="block"></span>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    perLetterDuration: {
+      type: Number,
+      default: 270,
+    },
+  },
   data() {
     return {
       textEl: null,
-      textElCopy: null,
+      textEl2: null,
+      textEl3: null,
 
       x: 0,
       currentTick: 0,
@@ -20,37 +28,27 @@ export default {
   },
   mounted() {
     this.textEl = this.$refs.textContainer.firstElementChild;
-    this.textElCopy = this.textEl.cloneNode(true);
+    this.textEl2 = this.textEl.cloneNode(true);
+    this.textEl3 = this.textEl.cloneNode(true);
 
     // Append copy
-    this.$refs.textContainer2.appendChild(this.textElCopy);
+    this.$refs.textContainer2.appendChild(this.textEl2);
+    this.$refs.textContainer3.appendChild(this.textEl3);
 
-    const perLetterDuration = 270;
-    const totalDuration = perLetterDuration * this.textEl.innerText.length;
+    const totalDuration = this.perLetterDuration * this.textEl.innerText.length;
 
+    // Set Duration
     this.$refs.textContainer.style.animationDuration = `${totalDuration}ms`;
     this.$refs.textContainer2.style.animationDuration = `${totalDuration}ms`;
-
-    // const fps = 60;
-    // const tick = 1000 / fps;
-    // const totalTicks = (totalDuration / 1000) * fps;
-    // const xPerTick = 100 / totalTicks;
-
-    // setInterval(() => {
-    //   this.$refs.textContainer.style.transform = `translate(-${this.x}%, 0%) translate3d(0px,0px,0px)`;
-    //   this.$refs.textContainer2.style.transform = `translate(-${this.x}%, 0%) translate3d(0px,0px,0px)`;
-
-    //   this.x = this.currentTick * xPerTick;
-    //   this.currentTick =
-    //     this.currentTick > totalTicks ? 0 : this.currentTick + 1;
-    // }, tick);
+    this.$refs.textContainer3.style.animationDuration = `${totalDuration}ms`;
   },
 };
 </script>
 
 <style scoped>
 #textContainer,
-#textContainer2 {
+#textContainer2,
+#textContainer3 {
   animation: ltr linear infinite;
 }
 

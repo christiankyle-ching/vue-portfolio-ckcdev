@@ -6,11 +6,12 @@
 
 html {
   scroll-behavior: smooth;
+
+  font-size: 18px;
 }
 
 body {
   font-family: "Poppins", sans-serif;
-  font-size: 18px;
 
   @apply bg-black text-white;
 }
@@ -18,34 +19,38 @@ body {
 /* --- Text --- */
 
 h1 {
-  font-size: 2.25rem;
+  @apply text-4xl !leading-normal;
 }
 
 h2 {
-  font-size: 1.875rem;
+  @apply text-3xl !leading-normal;
 }
 
 h3 {
-  font-size: 1.5rem;
+  @apply text-2xl !leading-normal;
 }
 
 h4 {
-  font-size: 1.25rem;
+  @apply text-xl !leading-normal;
 }
 
 h5 {
-  font-size: 1.125rem;
+  @apply text-lg !leading-normal;
 }
 
 h6 {
-  font-size: 1rem;
+  @apply text-base !leading-normal;
 }
 
 /* --- Components --- */
 
+.cards-group:hover .card:not(.card--bg-hover) > .card__background {
+  @apply opacity-0 !important;
+}
+
 .card {
   @apply rounded-[3rem] overflow-hidden p-6 relative min-h-[10rem];
-  @apply flex flex-col justify-between items-stretch;
+  @apply flex flex-col justify-between items-stretch gap-6;
   @apply transition-all duration-700;
 
   /* Inactive */
@@ -56,7 +61,8 @@ h6 {
   @apply scale-100 opacity-100;
 }
 
-.card.active:hover {
+a.card.active:hover,
+button.card.active:hover {
   @apply scale-95;
 }
 
@@ -65,28 +71,16 @@ h6 {
   @apply transition-all duration-500;
 }
 
-.card--background-hover.active > header,
-.card--background-hover.active > footer {
+.card--bg-hover > *:not(.card__background),
+.card--bg-hover > .card__background {
   @apply transition-all;
 }
 
-.card--background-hover.active:hover > header,
-.card--background-hover.active:hover > footer {
+.card--bg-hover:hover > *:not(.card__background),
+.card--bg-hover > .card__background {
   @apply opacity-0;
 }
 
-/* --- Animations --- */
-
-.animate-pulse-full {
-  animation: pulse-full 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-@keyframes pulse-full {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
+.card--bg-hover:hover > .card__background {
+  @apply opacity-100;
 }

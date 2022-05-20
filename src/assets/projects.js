@@ -93,7 +93,7 @@ import img_johnRuthWedding_settings from "@/assets/images/projects/john-ruth-wed
 import img_johnRuthWedding_verification from "@/assets/images/projects/john-ruth-wedding/verification.png";
 //#endregion
 
-//#region Definitions
+//#region Class Definitions
 class Project {
   constructor({
     id,
@@ -105,6 +105,8 @@ class Project {
     features,
     stack,
     hidden,
+    priority,
+    platform,
   }) {
     this.id = id ?? "";
     this.title = title ?? "";
@@ -115,6 +117,8 @@ class Project {
     this.features = features ?? [];
     this.stack = stack ?? "";
     this.hidden = hidden ?? false;
+    this.priority = priority ?? 0;
+    this.platform = platform ?? "";
   }
 
   get descriptionHtml() {
@@ -149,13 +153,15 @@ class ProjectLink {
 }
 //#endregion
 
-export default [
+const PROJECTS = [
   // John & Ruth Wedding
   new Project({
     id: "john-ruth-wedding",
     title: "John & Ruth Wedding RSVP",
     date_dev: new Date(2022, 1, 9),
     stack: "Vue.JS 3, Firebase, Bulma CSS",
+    priority: 5,
+    platform: "Web",
     descriptionParagraphs: [
       "This is an RSVP website I made for the wedding of Ms. Mary Ruth Babijis and Mr. John Paulo Robles.",
       "This also served as their official digital invitation, instead of the more traditional paper card invitation.",
@@ -206,7 +212,9 @@ export default [
     id: "bytes-of-past",
     title: "Bytes of Past",
     date_dev: new Date(2022, 0, 1),
-    stack: "Unity, Mirror Networking, C#, Android",
+    stack: "Unity, Mirror Networking, C#",
+    priority: 4,
+    platform: "Android",
     descriptionParagraphs: [
       "This is my Capstone Project as part of requirement of my Bachelor's Degree in Information Technology. Bytes of Past is an Android LAN Multiplayer Card Game built with Unity and Mirror Networking. This card game aims to be a supplementary gamified tool to teach ICT-related history inventions (courtesy of CHM).",
       "I worked on implementing the game logic, the drag-drop functionality, the multiplayer logic (which is quite the challenge), and the logic to switch scenes back and forth.",
@@ -281,6 +289,8 @@ export default [
     title: "Digital Wellbeing For Windows",
     date_dev: new Date(2021, 7, 26),
     stack: "C#, WPF",
+    priority: 6,
+    platform: "Windows 10",
     descriptionParagraphs: [
       'Digital Wellbeing For Windows is a Windows app that is inspired by Android\'s app usage monitoring named, of course, "Digital Wellbeing". I found myself needing an app like this for Windows, but the options seemed to be too limited. Windows 10 has a built-in app for this called Microsoft Family, but it needs Microsoft Accounts to be set up and devices to be connected and be managed over the web.',
       'I also found an app called "Time Sense" for Windows, but cannot seem to get it for free (needs redeem code). Other time tracking apps available are focused more to be used for timing your PC usage for your billable work. I just wanted a simple app that shows me what apps I have used the most.',
@@ -334,6 +344,7 @@ export default [
     title: "FOMO Reservation Web App",
     date_dev: new Date(2021, 3, 19),
     stack: "Vue.JS 3, Firebase, Netlify Functions, Paymongo",
+    platform: "Web",
     descriptionParagraphs: [
       "This web application is inspired to meet the demands of a famous online food store in the Philippines that appeals to the market using the FOMO strategy. They sell food products such as Milk Tea and Rice Meals online, but with a catch! They only pick the earliest people that enlists for a batch of orders and limits it to gain popularity and make customers curious to what they offer. This proved to be working as a business model, and I decided to make a real-time updating web application that caters this business flow, from reservation, ordering, and payment, as a challenge to myself in web development.",
       "I used Vue.JS 3 framework for building the front-end, Firebase for the backend, and Netlify Functions for reacting to web hooks for the payment using Paymongo.",
@@ -397,6 +408,7 @@ export default [
     title: "NASA's APOD",
     stack: "Flutter, Dart",
     date_dev: new Date(2020, 9, 10),
+    platform: "Android",
     descriptionParagraphs: [
       "NASA's APOD is one of the most popular APIs by NASA, and while finding an API to enhance my skills, and also catching into Flutter's gaining popularity, I decided to create an app to try showcase APOD other than NASA's single webpage.",
       'NOTE: NASA updates APOD sometime after midnight of EST (Eastern Standard Time UTC-5). If the app shows "No Available APOD for today", the next update time is estimated based on your local timezone.',
@@ -447,6 +459,7 @@ export default [
     id: "roomfiles",
     date_dev: new Date(2020, 7, 12),
     title: "RoomFiles",
+    platform: "Web",
     descriptionParagraphs: [
       "RoomFiles is a small project I made while learning Python and Django. Using Django's Google Drive API, this simple web-app provides a place for users to upload files to (primarily lesson filesfor online learning), make announcements, all in a virtual room. Due to the ongoing (at the time of writing) pandemic situation, online learning is what our educational system relies to, and this might help students store their lesson files on the cloud.",
       "The web-app is up and available for viewing using the links below.",
@@ -498,6 +511,7 @@ export default [
     stack: "Ionic, Angular",
     id: "budget",
     title: "Budget Planner",
+    platform: "Android",
     date_dev: new Date(2020, 5, 1),
     descriptionParagraphs: [
       "A simple budget planner that I made using Ionic / Angular stack. While starting to learn about Ionic, it has come to my idea to make a relatively simple budget planner/tracking app targeted for highschool students that hopefully, they can use to track their allowances and expenses, and might encourage them to save some of their money.",
@@ -538,6 +552,7 @@ export default [
     date_dev: new Date(2019, 11, 1),
     title: "Edzer Studio Schedule Management System",
     id: "edzer",
+    platform: "Windows",
     descriptionParagraphs: [
       "This is a group project that I made together with a team, as a requirement for one of my database-related subjects on my 2nd year. Along with a planned database schema, an interview with Edzer Music Studio, this WPF application (C# and MySQL served on XAMPP) features a scheduling system with fees computation based on hours and instrument rentals, instrument management, and a user panel for the administrator to assign other users with less privileges to the system.",
     ],
@@ -564,3 +579,9 @@ export default [
     ],
   }),
 ];
+
+const TOP_PROJECTS = PROJECTS.sort((a, b) => b.priority - a.priority).filter(
+  (p) => p.priority > 0
+);
+
+export { PROJECTS, TOP_PROJECTS };
