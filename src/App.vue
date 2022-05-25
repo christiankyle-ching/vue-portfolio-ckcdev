@@ -1,12 +1,13 @@
 <script setup></script>
 
 <template>
-  <!-- <nav>
-    <RouterLink to="/">Home</RouterLink>
-    <RouterLink to="/about">About</RouterLink>
-  </nav> -->
-
-  <RouterView/>
+  <div class="px-2">
+    <RouterView v-slot="{ Component, route }">
+      <transition name="route">
+        <component :is="Component" mode="out-in" />
+      </transition>
+    </RouterView>
+  </div>
 </template>
 
 <style>

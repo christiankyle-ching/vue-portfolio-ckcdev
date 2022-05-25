@@ -44,10 +44,6 @@ h6 {
 
 /* --- Components --- */
 
-.cards-group:hover .card:not(.card--bg-hover) > .card__background {
-  @apply opacity-0 !important;
-}
-
 .card {
   @apply rounded-[3rem] overflow-hidden p-6 relative min-h-[10rem];
   @apply flex flex-col justify-between items-stretch gap-6;
@@ -71,8 +67,7 @@ button.card.active:hover {
   @apply transition-all duration-500;
 }
 
-.card--bg-hover > *:not(.card__background),
-.card--bg-hover > .card__background {
+.card--bg-hover > * {
   @apply transition-all;
 }
 
@@ -83,4 +78,30 @@ button.card.active:hover {
 
 .card--bg-hover:hover > .card__background {
   @apply opacity-100;
+}
+
+/* --- Animations --- */
+
+/* Page Animation */
+.route-enter-active,
+.route-leave-active {
+  @apply transition-all origin-bottom !important;
+}
+
+/* Page Leaving */
+.route-leave-active {
+  @apply duration-500 !important;
+}
+
+.route-leave-to {
+  @apply scale-50 opacity-0;
+}
+
+/* Page Entering */
+.route-enter-active {
+  @apply duration-1000 !important;
+}
+
+.route-enter-from {
+  @apply translate-x-[100vw];
 }

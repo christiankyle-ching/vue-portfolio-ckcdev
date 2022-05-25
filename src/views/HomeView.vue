@@ -1,6 +1,6 @@
 <template>
-  <div class="w-screen px-2">
-    <main class="min-h-screen w-full">
+  <div @scroll="onScroll">
+    <main class="min-h-screen">
       <!-- Top Column -->
       <div class="flex justify-center items-center !min-h-[35vh]">
         <h2>ckching.dev</h2>
@@ -11,22 +11,48 @@
         <!-- Main Card -->
         <a
           href="#more-links"
-          class="card active !min-h-[65vh] h-full bg-blue-700"
+          class="card !min-h-[65vh] h-full bg-blue-700 group !opacity-100 !scale-100"
         >
           <header>
             <h3>Portfolio</h3>
           </header>
 
-          <div class="card__background flex hover:opacity-0">
-            <LoopingText class="m-auto">
-              <span class="text-3xl lg:text-5xl">
-                I am an aspiring Web / App Developer.&nbsp;
-              </span>
-            </LoopingText>
+          <div class="card__background flex relative">
+            <div class="group-hover:opacity-0 transition-opacity flex">
+              <LoopingAnimator class="m-auto">
+                <span class="text-3xl lg:text-5xl">
+                  I am an aspiring Web / App Developer.&nbsp;
+                </span>
+              </LoopingAnimator>
+            </div>
+
+            <div
+              class="opacity-0 group-hover:opacity-100 transition-opacity absolute top-0 left-0 right-0 bottom-0 flex"
+            >
+              <LoopingAnimator class="m-auto">
+                <div class="flex gap-8 pr-8 items-center">
+                  <img
+                    src="@/assets/images/django.png"
+                    alt="Django"
+                    class="min-w-[7rem] rounded-lg"
+                  />
+                  <img
+                    src="@/assets/images/vue.png"
+                    alt="Vue"
+                    class="min-w-[4rem] rounded-lg p-2 bg-white"
+                  />
+                  <img
+                    src="@/assets/images/firebase.png"
+                    alt="Vue"
+                    class="min-w-[3rem] rounded-lg p-2 bg-blue-300"
+                  />
+                </div>
+              </LoopingAnimator>
+            </div>
           </div>
 
           <footer>
-            <span class="flex justify-between items-center">
+            <span class="flex justify-between items-center lg:hidden">
               <span>See more</span>
               <button>
                 <ArrowDownIcon />
@@ -39,15 +65,15 @@
           <!-- Projects -->
           <a
             href="#top-projects"
-            class="card active bg-red-800 card--bg-hover col-span-full"
+            class="card bg-red-800 card--bg-hover col-span-full lg:!opacity-100 lg:!scale-100"
           >
             <header>
               <h6>Projects</h6>
             </header>
             <div class="card__background flex">
-              <LoopingText class="m-auto">
+              <LoopingAnimator class="m-auto">
                 <span class="text-3xl lg:text-5xl">View my works.&nbsp;</span>
-              </LoopingText>
+              </LoopingAnimator>
             </div>
             <footer>
               <a class="flex justify-between items-center">
@@ -62,32 +88,35 @@
           <!-- About -->
           <a
             href="#about-me"
-            class="card active bg-violet-700 card--bg-hover col-span-1"
+            class="card bg-violet-700 card--bg-hover col-span-1 lg:!opacity-100 lg:!scale-100"
           >
             <header>
               <h6>About Me</h6>
             </header>
             <div class="card__background flex">
-              <LoopingText class="m-auto">
+              <LoopingAnimator class="m-auto">
                 <span class="text-3xl lg:text-5xl"
                   >Get to know me more!&nbsp;</span
                 >
-              </LoopingText>
+              </LoopingAnimator>
             </div>
             <footer></footer>
           </a>
 
           <!-- Contact -->
-          <a href="" class="card active bg-green-700 card--bg-hover col-span-1">
+          <a
+            href="#contact"
+            class="card bg-green-700 card--bg-hover col-span-1 lg:!opacity-100 lg:!scale-100"
+          >
             <header>
               <h6>Contact</h6>
             </header>
             <div class="card__background flex">
-              <LoopingText class="m-auto">
+              <LoopingAnimator class="m-auto">
                 <span class="text-3xl lg:text-5xl"
                   >Have an idea? Connect with me!&nbsp;</span
                 >
-              </LoopingText>
+              </LoopingAnimator>
             </div>
             <footer></footer>
           </a>
@@ -96,15 +125,15 @@
     </main>
 
     <section id="top-projects" class="mt-2 grid grid-cols-2 gap-2">
-      <div class="card active h-full bg-red-800 col-span-full">
+      <div class="card h-full bg-red-800 col-span-full">
         <h2 class="m-auto">Top Projects</h2>
       </div>
 
       <!-- For: Projects -->
-      <a
-        href=""
+      <RouterLink
+        :to="{ name: 'project', params: { id: project.id } }"
         v-for="project in TOP_PROJECTS"
-        class="card active h-full bg-slate-900 card--bg-hover"
+        class="card h-full bg-slate-900 card--bg-hover"
       >
         <header>
           <h5>{{ project.title }}</h5>
@@ -116,28 +145,28 @@
             alt=""
             class="absolute top-0 left-0 w-full h-full object-cover object-center opacity-20"
           />
-          <LoopingText class="m-auto">
+          <LoopingAnimator class="m-auto">
             <span class="text-3xl lg:text-5xl">
               <b>{{ project.platform }}</b> | {{ project.stack }} |
               <b>{{ project.date_dev.getFullYear() }}</b> |&nbsp;
             </span>
-          </LoopingText>
+          </LoopingAnimator>
         </div>
 
         <footer>
-          <span href="" class="flex justify-between items-center">
+          <span class="flex justify-between items-center">
             <span>View</span>
             <ArrowRightIcon />
           </span>
         </footer>
-      </a>
+      </RouterLink>
     </section>
 
-    <section id="about-me" class="mt-2 card active bg-red-800">
+    <section id="about-me" class="mt-2 card bg-red-800">
       <header>
-        <LoopingText :perLetterDuration="500">
-          <span class="text-9xl">Who Am I?&nbsp;</span>
-        </LoopingText>
+        <LoopingAnimator :speed="0.8">
+          <span class="text-7xl lg:text-9xl">Who Am I?&nbsp;</span>
+        </LoopingAnimator>
       </header>
 
       <img
@@ -158,7 +187,7 @@
     </section>
 
     <section id="contact" class="mt-2 flex flex-col gap-2">
-      <div class="card active bg-red-800">
+      <div class="card bg-red-800">
         <header>
           <h2>
             I'm open for new opportunities! You can reach me at my links below.
@@ -171,7 +200,7 @@
         <a
           href="mailto:ckching.dev@gmail.com"
           target="_blank"
-          class="card active bg-red-800"
+          class="card bg-red-800"
         >
           <header></header>
           <div>
@@ -185,7 +214,7 @@
         <a
           href="https://github.com/christiankyle-ching"
           target="_blank"
-          class="card active bg-red-800"
+          class="card bg-red-800"
         >
           <header></header>
           <div>
@@ -199,7 +228,7 @@
         <a
           href="https://www.linkedin.com/in/christiankyle-ching"
           target="_blank"
-          class="card active bg-red-800"
+          class="card bg-red-800"
         >
           <header></header>
           <div>
@@ -213,7 +242,7 @@
         <a
           href="https://www.facebook.com/christiankyle.ching"
           target="_blank"
-          class="card active bg-red-800"
+          class="card bg-red-800"
         >
           <header></header>
           <div>
@@ -224,19 +253,40 @@
         </a>
       </div>
     </section>
+
+    <footer>
+      <!-- Attributions -->
+    </footer>
   </div>
 </template>
 
 <script setup>
 import { PROJECTS, TOP_PROJECTS } from "@/assets/projects.js";
 
-import LoopingText from "@/components/LoopingText.vue";
+import _ from "lodash";
+
+import LoopingAnimator from "@/components/LoopingAnimator.vue";
 import ArrowDownIcon from "@/components/icons/ArrowDownIcon.vue";
 import ArrowRightIcon from "@/components/icons/ArrowRightIcon.vue";
 import GithubIcon from "../components/icons/GithubIcon.vue";
 import LinkedinIcon from "../components/icons/LinkedinIcon.vue";
 import EmailIcon from "../components/icons/EmailIcon.vue";
 import FacebookIcon from "../components/icons/FacebookIcon.vue";
+
+import { isInViewport } from "../utils.js";
+
+function showVisibleCards() {
+  document.querySelectorAll(".card:not(.active)").forEach((el) => {
+    if (isInViewport(el)) el.classList.add("active");
+  });
+}
+
+window.addEventListener(
+  "scroll",
+  _.throttle(() => {
+    showVisibleCards();
+  }, 50)
+);
 </script>
 
 <style></style>
