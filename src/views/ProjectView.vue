@@ -1,6 +1,6 @@
 <template>
   <div v-if="project" class="grid grid-cols-1 lg:grid-cols-2 gap-2">
-    <div class="card bg-red-800 text-white active col-span-full">
+    <div class="card bg-_dark-teal text-white active col-span-full">
       <header>
         <h1 class="text-center">{{ project.title }}</h1>
       </header>
@@ -13,7 +13,7 @@
             <img
               :src="image.url"
               alt=""
-              class="h-full w-full object-cover rounded-3xl border-red-500 border-4"
+              class="h-full w-full object-cover rounded-3xl border-4 border-_teal"
             />
           </div>
         </div>
@@ -21,33 +21,36 @@
       <div v-else>
         <video
           :src="project.videos[0].url"
-          class="h-[50vh] m-auto rounded-3xl border-red-500 border-4"
+          class="h-[50vh] m-auto rounded-3xl bg-_teal border-4"
           autoplay
           muted
           loop
         ></video>
-        <a href="#more-images" class="flex justify-between mt-4">
+        <!-- <a href="#more-images" class="flex justify-between mt-4">
           <span>More Images</span>
           <ArrowDownIcon />
-        </a>
+        </a> -->
       </div>
+      <footer>
+        <span class="text-center">
+          Built With
+          <strong>{{ project.stack }}</strong>
+          for
+          <strong>{{ project.platform }}.</strong>
+        </span>
+      </footer>
     </div>
 
-    <section id="description" class="card bg-red-800 text-white">
+    <section id="description" class="card bg-_dark-teal text-white">
       <div>
         <h2>Description</h2>
         <p v-for="p in project.descriptionParagraphs" class="mt-2">
           {{ p }}
         </p>
       </div>
-      <p>
-        <strong>
-          Built With {{ project.stack }} for {{ project.platform }}.
-        </strong>
-      </p>
     </section>
 
-    <section id="features" class="card bg-red-800 text-white">
+    <section id="features" class="card bg-_dark-teal text-white">
       <div>
         <h2>Features</h2>
         <ul class="list-disc pl-4">
@@ -59,9 +62,9 @@
     </section>
 
     <section
-      v-if="!showImages"
+      v-if="!showImages && !!project.images"
       id="more-images"
-      class="card bg-red-800 text-white col-span-full"
+      class="card bg-_dark-teal text-white col-span-full"
     >
       <header>
         <h2 class="text-center">Screenshots</h2>
@@ -75,23 +78,23 @@
             <img
               :src="image.url"
               alt=""
-              class="h-full w-full object-cover rounded-3xl border-red-500 border-4"
+              class="h-full w-full object-cover rounded-3xl bg-_teal border-4"
             />
           </div>
         </div>
       </LoopingAnimator>
     </section>
 
-    <section id="links" class="card bg-red-800 text-white col-span-full">
+    <section id="links" class="card bg-_dark-teal col-span-full">
       <header>
         <h2 class="text-center">Links</h2>
       </header>
-      <footer class="flex !w-full items-stretch justify-evenly">
+      <footer class="flex !w-full items-stretch justify-evenly gap-4">
         <a
           v-for="link in project.links"
           :href="link.url"
           target="_blank"
-          class="bg-red-500 !min-h-0 p-4 px-6 rounded-3xl flex items-center gap-4"
+          class="button"
         >
           <ProjectIcon :site="link.site" />
           <span class="capitalize">{{ link.site }}</span>

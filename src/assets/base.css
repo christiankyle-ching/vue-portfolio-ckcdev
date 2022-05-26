@@ -13,7 +13,7 @@ html {
 body {
   font-family: "Poppins", sans-serif;
 
-  @apply bg-black text-white;
+  @apply bg-_black text-white;
 }
 
 /* width */
@@ -65,6 +65,11 @@ h6 {
 /* #endregion */
 
 /* #region --- Components --- */
+
+.button {
+  @apply bg-_teal hover:bg-_light-teal hover:text-_black; /* Default only */
+  @apply p-2 px-4 rounded-full flex items-center gap-4 transition-colors;
+}
 
 /* #region Cards */
 .card {

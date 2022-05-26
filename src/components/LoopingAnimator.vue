@@ -38,12 +38,14 @@ export default {
       this.$refs.container.appendChild(copy);
     }
 
-    const totalDuration =
-      (this.$refs.elContainer.clientWidth * 15) / this.speed;
+    setTimeout(() => {
+      const totalDuration =
+        (this.$refs.elContainer.clientWidth * 15) / this.speed;
 
-    for (let el of this.$refs.container.children) {
-      el.style.animationDuration = `${totalDuration}ms`;
-    }
+      for (let el of this.$refs.container.children) {
+        el.style.animationDuration = `${totalDuration}ms`;
+      }
+    }, 100);
   },
 };
 </script>
