@@ -1,14 +1,35 @@
-<script setup></script>
-
 <template>
-  <div class="px-2">
+  <div class="p-2 overflow-hidden w-screen max-w-[100%]">
     <RouterView v-slot="{ Component, route }">
       <transition name="route">
-        <component :is="Component" mode="out-in" />
+        <component :is="Component" mode="out-in" :key="route.path" />
       </transition>
     </RouterView>
   </div>
 </template>
+
+<script>
+import { isInViewport, addClassIfInViewport } from "@/utils.js";
+import _ from "lodash";
+
+export default {
+  mounted() {
+    window.addEventListener(
+      "scroll",
+      _.throttle(() => {
+        addClassIfInViewport(".card:not(.active)", "active");
+      }, 150)
+    );
+  },
+  watch: {
+    $route(to, from) {
+      setTimeout(() => {
+        addClassIfInViewport(".card:not(.active)", "active");
+      }, 1000);
+    },
+  },
+};
+</script>
 
 <style>
 @import "@/assets/base.css";

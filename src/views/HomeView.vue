@@ -1,5 +1,5 @@
 <template>
-  <div @scroll="onScroll">
+  <div>
     <main class="min-h-screen">
       <!-- Top Column -->
       <div class="flex justify-center items-center !min-h-[35vh]">
@@ -11,7 +11,7 @@
         <!-- Main Card -->
         <a
           href="#more-links"
-          class="card !min-h-[65vh] h-full bg-blue-700 group !opacity-100 !scale-100"
+          class="card !min-h-[65vh] h-full bg-blue-700 group"
         >
           <header>
             <h3>Portfolio</h3>
@@ -65,7 +65,7 @@
           <!-- Projects -->
           <a
             href="#top-projects"
-            class="card bg-red-800 card--bg-hover col-span-full lg:!opacity-100 lg:!scale-100"
+            class="card bg-red-800 card--bg-hover col-span-full"
           >
             <header>
               <h6>Projects</h6>
@@ -88,11 +88,8 @@
           <!-- About -->
           <a
             href="#about-me"
-            class="card bg-violet-700 card--bg-hover col-span-1 lg:!opacity-100 lg:!scale-100"
+            class="card bg-violet-700 card--bg-hover col-span-1"
           >
-            <header>
-              <h6>About Me</h6>
-            </header>
             <div class="card__background flex">
               <LoopingAnimator class="m-auto">
                 <span class="text-3xl lg:text-5xl"
@@ -100,17 +97,16 @@
                 >
               </LoopingAnimator>
             </div>
-            <footer></footer>
+            <div class="flex h-full">
+              <UserIcon class="m-auto h-12 w-12" />
+            </div>
           </a>
 
           <!-- Contact -->
           <a
             href="#contact"
-            class="card bg-green-700 card--bg-hover col-span-1 lg:!opacity-100 lg:!scale-100"
+            class="card bg-green-700 card--bg-hover col-span-1"
           >
-            <header>
-              <h6>Contact</h6>
-            </header>
             <div class="card__background flex">
               <LoopingAnimator class="m-auto">
                 <span class="text-3xl lg:text-5xl"
@@ -118,7 +114,9 @@
                 >
               </LoopingAnimator>
             </div>
-            <footer></footer>
+            <div class="flex h-full">
+              <PhoneIcon class="m-auto h-12 w-12" />
+            </div>
           </a>
         </div>
       </div>
@@ -160,6 +158,20 @@
           </span>
         </footer>
       </RouterLink>
+
+      <!-- For: Projects -->
+      <a
+        href="https://github.com/christiankyle-ching?tab=repositories"
+        target="_blank"
+        class="card h-full bg-slate-900"
+      >
+        <div class="m-auto">
+          <span class="flex justify-between items-center gap-4">
+            <h5>View All Repositories at Github</h5>
+            <ArrowRightIcon />
+          </span>
+        </div>
+      </a>
     </section>
 
     <section id="about-me" class="mt-2 card bg-red-800">
@@ -188,7 +200,7 @@
 
     <section id="contact" class="mt-2 flex flex-col gap-2">
       <div class="card bg-red-800">
-        <header>
+        <header class="m-auto">
           <h2>
             I'm open for new opportunities! You can reach me at my links below.
           </h2>
@@ -263,30 +275,15 @@
 <script setup>
 import { PROJECTS, TOP_PROJECTS } from "@/assets/projects.js";
 
-import _ from "lodash";
-
-import LoopingAnimator from "@/components/LoopingAnimator.vue";
-import ArrowDownIcon from "@/components/icons/ArrowDownIcon.vue";
-import ArrowRightIcon from "@/components/icons/ArrowRightIcon.vue";
+import LoopingAnimator from "../components/LoopingAnimator.vue";
+import ArrowDownIcon from "../components/icons/ArrowDownIcon.vue";
 import GithubIcon from "../components/icons/GithubIcon.vue";
 import LinkedinIcon from "../components/icons/LinkedinIcon.vue";
 import EmailIcon from "../components/icons/EmailIcon.vue";
 import FacebookIcon from "../components/icons/FacebookIcon.vue";
-
-import { isInViewport } from "../utils.js";
-
-function showVisibleCards() {
-  document.querySelectorAll(".card:not(.active)").forEach((el) => {
-    if (isInViewport(el)) el.classList.add("active");
-  });
-}
-
-window.addEventListener(
-  "scroll",
-  _.throttle(() => {
-    showVisibleCards();
-  }, 50)
-);
+import ArrowRightIcon from "../components/icons/ArrowRightIcon.vue";
+import PhoneIcon from "../components/icons/PhoneIcon.vue";
+import UserIcon from "../components/icons/UserIcon.vue";
 </script>
 
 <style></style>

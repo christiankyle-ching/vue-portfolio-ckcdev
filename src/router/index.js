@@ -4,6 +4,14 @@ import ProjectView from "../views/ProjectView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+  scrollBehavior(to, from, savedPosition) {
+    if (to.name === "project") {
+      return { top: 0 };
+    }
+
+    // Delay for transition
+    return savedPosition;
+  },
   routes: [
     {
       path: "/",

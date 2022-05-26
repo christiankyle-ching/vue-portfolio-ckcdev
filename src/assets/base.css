@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: smooth !important;
 
   font-size: 18px;
 }
@@ -16,7 +16,27 @@ body {
   @apply bg-black text-white;
 }
 
-/* --- Text --- */
+/* width */
+::-webkit-scrollbar {
+  width: 14px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-neutral-600 transition-all duration-300 rounded-full border-4 border-transparent border-solid bg-clip-padding;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-neutral-700;
+}
+
+/* #region --- Text --- */
 
 h1 {
   @apply text-4xl !leading-normal;
@@ -42,8 +62,11 @@ h6 {
   @apply text-base !leading-normal;
 }
 
-/* --- Components --- */
+/* #endregion */
 
+/* #region --- Components --- */
+
+/* #region Cards */
 .card {
   @apply rounded-[3rem] overflow-hidden p-6 relative min-h-[10rem];
   @apply flex flex-col justify-between items-stretch gap-6;
@@ -79,10 +102,13 @@ button.card.active:hover {
 .card--bg-hover:hover > .card__background {
   @apply opacity-100;
 }
+/* #endregion */
 
-/* --- Animations --- */
+/* #endregion */
 
-/* Page Animation */
+/* #region --- Animations --- */
+
+/* #region Page Animation */
 .route-enter-active,
 .route-leave-active {
   @apply transition-all origin-bottom !important;
@@ -103,5 +129,8 @@ button.card.active:hover {
 }
 
 .route-enter-from {
-  @apply translate-x-[100vw];
+  @apply translate-x-[100vw] opacity-0;
 }
+/* #endregion */
+
+/* #endregion */

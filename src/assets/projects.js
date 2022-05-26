@@ -101,7 +101,7 @@ class Project {
     date_dev,
     descriptionParagraphs,
     links,
-    images,
+    media,
     features,
     stack,
     hidden,
@@ -113,7 +113,7 @@ class Project {
     this.date_dev = date_dev ?? null;
     this.descriptionParagraphs = descriptionParagraphs ?? [];
     this.links = links ?? [];
-    this.images = images ?? [];
+    this.media = media ?? [];
     this.features = features ?? [];
     this.stack = stack ?? "";
     this.hidden = hidden ?? false;
@@ -121,12 +121,20 @@ class Project {
     this.platform = platform ?? "";
   }
 
-  get descriptionHtml() {
+  get descriptionHTML() {
     let htmlStr = "";
     this.descriptionParagraphs.forEach((p) => {
       htmlStr += `<p>${p}</p>`;
     });
     return htmlStr;
+  }
+
+  get images() {
+    return this.media.filter((media) => !media.isVideo);
+  }
+
+  get videos() {
+    return this.media.filter((media) => media.isVideo);
   }
 }
 
@@ -182,7 +190,7 @@ const PROJECTS = [
     links: [
       new ProjectLink(ProjectSite.OPEN, "https://john-ruth-wedding.web.app/"),
     ],
-    images: [
+    media: [
       new ProjectImage(img_johnRuthWedding_introVideo, "", true),
       new ProjectImage(img_johnRuthWedding_gallery, "Photo Gallery"),
       new ProjectImage(img_johnRuthWedding_find, "Guest: Find"),
@@ -240,7 +248,7 @@ const PROJECTS = [
         "https://github.com/christiankyle-ching/Prototype--Bytes-of-Past"
       ),
     ],
-    images: [
+    media: [
       new ProjectImage(img_bytesOfPast_logo),
       new ProjectImage(img_bytesOfPast_main_menu, "Main Menu"),
       new ProjectImage(img_bytesOfPast_settings, "Settings"),
@@ -306,7 +314,7 @@ const PROJECTS = [
         "https://github.com/christiankyle-ching/DigitalWellbeingForWindows"
       ),
     ],
-    images: [
+    media: [
       new ProjectImage(
         img_digitalWellbeingWindows_logo,
         "Digital Wellbeing For Windows"
@@ -370,7 +378,7 @@ const PROJECTS = [
         "https://github.com/christiankyle-ching/FOMO-Reservation"
       ),
     ],
-    images: [
+    media: [
       new ProjectImage(img_fomo_limited_reservation, "Limited Reservation"),
       new ProjectImage(
         img_fomo_early_order,
@@ -423,7 +431,7 @@ const PROJECTS = [
         "https://github.com/christiankyle-ching/nasa-apod/"
       ),
     ],
-    images: [
+    media: [
       new ProjectImage(img_nasaApod_logo, "NASA's APOD"),
       new ProjectImage(img_nasaApod_recents, "Browse the APOD Gallery"),
       new ProjectImage(
@@ -473,7 +481,7 @@ const PROJECTS = [
       "View and manage people in your room (if you're the room creator)",
       "Get notified on recent activities",
     ],
-    images: [
+    media: [
       new ProjectImage(img_roomfiles_logo, "RoomFiles"),
       new ProjectImage(
         img_roomfiles_room,
@@ -532,7 +540,7 @@ const PROJECTS = [
       "Able to backup data to a file for later recovery",
       "Has a Help & Feedback feature that answers FAQs and provides an email box for suggestions",
     ],
-    images: [
+    media: [
       new ProjectImage(
         img_budget_logo,
         "A simple budget planner made with Ionic"
@@ -556,7 +564,7 @@ const PROJECTS = [
     descriptionParagraphs: [
       "This is a group project that I made together with a team, as a requirement for one of my database-related subjects on my 2nd year. Along with a planned database schema, an interview with Edzer Music Studio, this WPF application (C# and MySQL served on XAMPP) features a scheduling system with fees computation based on hours and instrument rentals, instrument management, and a user panel for the administrator to assign other users with less privileges to the system.",
     ],
-    images: [
+    media: [
       new ProjectImage(img_edzer_logo, "A Recording Studio Scheduling System"),
       new ProjectImage(img_edzer_login, "Login"),
       new ProjectImage(img_edzer_dashboard, "Dashboard Overview"),
@@ -584,4 +592,8 @@ const TOP_PROJECTS = PROJECTS.sort((a, b) => b.priority - a.priority).filter(
   (p) => p.priority > 0
 );
 
-export { PROJECTS, TOP_PROJECTS };
+function getProjectByID(id) {
+  return PROJECTS.find((p) => p.id === id);
+}
+
+export { PROJECTS, TOP_PROJECTS, getProjectByID };
