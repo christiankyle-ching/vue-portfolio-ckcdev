@@ -16,6 +16,8 @@ body {
   @apply bg-_black text-white;
 }
 
+/* #region Scroll Bar */
+
 /* width */
 ::-webkit-scrollbar {
   width: 14px;
@@ -36,8 +38,11 @@ body {
   @apply bg-neutral-700;
 }
 
+/* #endregion */
+
 /* #region --- Text --- */
 
+/* #region Header Fonts */
 h1 {
   @apply text-4xl !leading-normal;
 }
@@ -60,6 +65,11 @@ h5 {
 
 h6 {
   @apply text-base !leading-normal;
+}
+/* #endregion */
+
+p a {
+  @apply underline;
 }
 
 /* #endregion */

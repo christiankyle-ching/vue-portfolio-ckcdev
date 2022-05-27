@@ -15,7 +15,7 @@
               <img
                 :src="image.url"
                 alt=""
-                class="h-full w-full object-cover rounded-3xl border-4 border-_dark-teal"
+                class="h-full w-full object-cover rounded-3xl border-4 border-_dark-teal bg-white"
                 loading="lazy"
               />
             </div>
@@ -24,7 +24,7 @@
         <div v-else>
           <video
             :src="project.videos[0].url"
-            class="h-[50vh] m-auto rounded-3xl border-4 border-_dark-teal"
+            class="h-[50vh] m-auto rounded-3xl border-4 border-_dark-teal bg-white"
             autoplay
             muted
             loop
@@ -44,7 +44,7 @@
         <div>
           <h2>Description</h2>
           <p v-for="p in project.descriptionParagraphs" class="mt-2">
-            {{ p }}
+            <span v-html="p"></span>
           </p>
         </div>
       </section>
@@ -77,7 +77,7 @@
               <img
                 :src="image.url"
                 alt=""
-                class="h-full w-full object-cover rounded-3xl border-4 border-_dark-teal"
+                class="h-full w-full object-cover rounded-3xl border-4 border-_dark-teal bg-white"
                 loading="lazy"
               />
             </div>
