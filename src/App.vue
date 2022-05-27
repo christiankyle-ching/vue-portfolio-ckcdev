@@ -1,5 +1,5 @@
 <template>
-  <div class="p-2 overflow-hidden w-screen max-w-[100%]">
+  <div class="p-2 overflow-hidden w-screen max-w-[100%] relative">
     <RouterView v-slot="{ Component, route }">
       <transition name="route">
         <component :is="Component" mode="out-in" :key="route.path" />
@@ -11,6 +11,8 @@
 <script>
 import { isInViewport, addClassIfInViewport } from "@/utils.js";
 import _ from "lodash";
+
+import "./firebase";
 
 export default {
   mounted() {

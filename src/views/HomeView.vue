@@ -9,8 +9,8 @@
       <!-- Bottom Column : Cards -->
       <div class="cards-group grid grid-cols-1 lg:grid-cols-2 gap-2">
         <!-- Main Card -->
-        <a href="#more-links" class="card !min-h-[65vh] h-full bg-_teal group">
-          <header>
+        <button class="card !min-h-[65vh] h-full bg-_teal group">
+          <header class="text-left">
             <h3>Portfolio</h3>
           </header>
 
@@ -49,14 +49,17 @@
           </div>
 
           <footer>
-            <span class="flex justify-between items-center lg:hidden">
+            <a
+              href="#more-links"
+              class="flex justify-between items-center lg:hidden"
+            >
               <span>See more</span>
               <button>
                 <ArrowDownIcon />
               </button>
-            </span>
+            </a>
           </footer>
-        </a>
+        </button>
 
         <div id="more-links" class="grid grid-cols-2 grid-rows-2 gap-2">
           <!-- Projects -->
@@ -181,7 +184,7 @@
       <img
         src="@/assets/images/christian-kyle-ching.jpg"
         alt=""
-        class="rounded-full h-[50vh] object-cover object-center border-8 border-_orange mx-auto"
+        class="rounded-full h-[40vh] lg:h-[50vh] object-cover object-center border-8 border-_orange mx-auto"
       />
 
       <!-- Name and Introduction -->
@@ -264,15 +267,31 @@
       </div>
     </section>
 
-    <footer class="mt-8 mb-4">
+    <footer class="mt-8 mb-4 flex flex-col gap-2">
       <!-- Attributions -->
       <p class="text-center text-sm">
         Design inspired by
-        <a href="https://www.thecraftsmen.tech/" class="underline"
-          >Craftsmen Agency</a
+        <a
+          href="https://www.thecraftsmen.tech/"
+          target="_blank"
+          class="underline"
+          >The Craftsmen Agency</a
         >
         and
-        <a href="https://www.kaploom.com/" class="underline">Kaploom</a>
+        <a href="https://www.kaploom.com/" target="_blank" class="underline"
+          >Kaploom</a
+        >.
+      </p>
+
+      <p class="text-center text-sm">
+        Icons by
+        <a href="https://heroicons.com/" target="_blank" class="underline"
+          >Heroicons</a
+        >
+        and
+        <a href="https://fontawesome.com/" target="_blank" class="underline"
+          >FontAwesome</a
+        >.
       </p>
     </footer>
   </div>

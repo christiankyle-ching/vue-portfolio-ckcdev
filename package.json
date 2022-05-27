@@ -7,6 +7,7 @@
     "preview": "vite preview --port 5050"
   },
   "dependencies": {
+    "firebase": "^9.8.1",
     "lodash": "^4.17.21",
     "vue": "^3.2.33",
     "vue-router": "^4.0.14"
