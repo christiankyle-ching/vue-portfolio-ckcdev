@@ -588,12 +588,16 @@ const PROJECTS = [
   }),
 ];
 
-const TOP_PROJECTS = PROJECTS.sort((a, b) => b.priority - a.priority).filter(
-  (p) => p.priority > 0
+const PROJECTS_SORTED = PROJECTS.sort((a, b) => b.priority - a.priority).sort(
+  (a, b) => b.date_dev - a.date_dev
 );
+
+const TOP_PROJECTS = PROJECTS_SORTED.sort(
+  (a, b) => b.priority - a.priority
+).filter((p) => p.priority > 0);
 
 function getProjectByID(id) {
   return PROJECTS.find((p) => p.id === id);
 }
 
-export { PROJECTS, TOP_PROJECTS, getProjectByID };
+export { PROJECTS, PROJECTS_SORTED, TOP_PROJECTS, getProjectByID };

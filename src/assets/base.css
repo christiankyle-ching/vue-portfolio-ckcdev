@@ -67,8 +67,31 @@ h6 {
 /* #region --- Components --- */
 
 .button {
-  @apply bg-_teal hover:bg-_light-teal hover:text-_black; /* Default only */
-  @apply p-2 px-4 rounded-full flex items-center gap-4 transition-colors;
+  @apply bg-_dark-teal hover:bg-_light-teal hover:text-_black; /* Default only */
+  @apply p-2 px-4 rounded-full flex items-center gap-2 transition-colors;
+}
+
+.button-back {
+  @apply fixed top-[5vh] left-0 z-10 button !bg-white !text-_black !rounded-tl-none !rounded-bl-none shadow-lg !p-3 !pl-2;
+
+  animation: button-back 300ms ease-out 1s forwards;
+
+  opacity: 0;
+  transform: translateX(-100%);
+
+  will-change: transform, opacity;
+}
+
+@keyframes button-back {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
 }
 
 /* #region Cards */
