@@ -1,26 +1,13 @@
 <template>
   <div class="relative">
     <BackButton :toPath="{ name: 'home' }" />
+
     <div v-if="project" class="grid grid-cols-1 lg:grid-cols-2 gap-2">
       <div class="card bg-_teal text-white active col-span-full">
         <header>
           <h1 class="text-center">{{ project.title }}</h1>
         </header>
-        <LoopingAnimator v-if="showImages">
-          <div class="flex gap-6 pr-6 items-center">
-            <div
-              v-for="image in project.images"
-              class="h-[50vh] w-[80vw] lg:w-[50vw]"
-            >
-              <img
-                :src="image.url"
-                alt=""
-                class="h-full w-full object-cover rounded-3xl border-4 border-_dark-teal bg-white"
-                loading="lazy"
-              />
-            </div>
-          </div>
-        </LoopingAnimator>
+        <ProjectImages v-if="showImages" :project="project" />
         <div v-else>
           <video
             :src="project.videos[0].url"
@@ -68,21 +55,7 @@
         <header>
           <h2 class="text-center">Screenshots</h2>
         </header>
-        <LoopingAnimator>
-          <div class="flex gap-6 pr-6 items-center">
-            <div
-              v-for="image in project.images"
-              class="h-[50vh] w-[80vw] lg:w-[50vw]"
-            >
-              <img
-                :src="image.url"
-                alt=""
-                class="h-full w-full object-cover rounded-3xl border-4 border-_dark-teal bg-white"
-                loading="lazy"
-              />
-            </div>
-          </div>
-        </LoopingAnimator>
+        <ProjectImages :project="project" />
       </section>
 
       <section id="links" class="card bg-_teal col-span-full !gap-2 !min-h-0">
@@ -118,6 +91,7 @@ import ArrowRightIcon from "../components/icons/ArrowRightIcon.vue";
 import ArrowLeftIcon from "../components/icons/ArrowLeftIcon.vue";
 import ShareIcon from "../components/icons/ShareIcon.vue";
 import BackButton from "../components/BackButton.vue";
+import ProjectImages from "../components/ProjectImages.vue";
 
 export default {
   data() {
@@ -165,6 +139,7 @@ export default {
     ArrowLeftIcon,
     ShareIcon,
     BackButton,
+    ProjectImages,
   },
 };
 </script>

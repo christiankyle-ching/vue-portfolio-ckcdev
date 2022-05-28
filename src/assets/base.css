@@ -104,6 +104,10 @@ p a {
   }
 }
 
+.spinner {
+  @apply h-10 w-10 border-[6px] animate-spin rounded-full m-auto border-r-transparent border-_teal block;
+}
+
 /* #region Cards */
 .card {
   @apply rounded-[3rem] overflow-hidden p-6 relative min-h-[10rem];
