@@ -5,4 +5,6 @@ const projectURLs = PROJECTS.map(
 );
 
 console.log("--- public/sitemap.txt ---");
+console.log("https://ckcdev.vercel.app/");
+console.log("https://ckcdev.vercel.app/projects/");
 console.log(projectURLs.join("\n"));
