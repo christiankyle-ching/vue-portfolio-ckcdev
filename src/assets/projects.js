@@ -1,4 +1,16 @@
 //#region Images : Ionic Budget Planner
+
+import img_boardResolutionIS_certificate_view from "@/assets/images/projects/board_resolution_is/certificate_view.png";
+import img_boardResolutionIS_profile from "@/assets/images/projects/board_resolution_is/profile.png";
+import img_boardResolutionIS_add_resolution from "@/assets/images/projects/board_resolution_is/add_resolution.png";
+import img_boardResolutionIS_manage_users from "@/assets/images/projects/board_resolution_is/manage_users.png";
+import img_boardResolutionIS_backup_restore from "@/assets/images/projects/board_resolution_is/backup_restore.png";
+import img_boardResolutionIS_resolutions from "@/assets/images/projects/board_resolution_is/resolutions.png";
+import img_boardResolutionIS_login from "@/assets/images/projects/board_resolution_is/login.png";
+
+//#endregion
+
+//#region Images : Ionic Budget Planner
 import img_budget_backup from "@/assets/images/projects/budget/backup.jpg";
 import img_budget_dark from "@/assets/images/projects/budget/dark.jpg";
 import img_budget_help from "@/assets/images/projects/budget/help.jpg";
@@ -162,6 +174,46 @@ class ProjectLink {
 //#endregion
 
 const PROJECTS = [
+  // Board Resolution IS
+  new Project({
+    id: "board_resolution_is",
+    title: "PLV Board Resolution",
+    date_dev: new Date(2022, 6, 2),
+    stack: "Django, TailwindCSS",
+    priority: 5,
+    platform: "Web",
+    descriptionParagraphs: [
+      "This is a web-based information system project that I spearheaded (with a team of 8 other members), from the development up to the deployment. This system aims to store board resolutions passed by the Office of the President, Pamantasan ng Lungsod ng Valenzuela (my college institution).",
+      "This helped the Office reduce the amount of physical space required to store paperworks, as it is now stored digitally through images. This also enabled them to search for specific resolutions and the date they were passed.",
+      "The system has been deployed in their Local Area Network (LAN) for their internal-use only, and is deployed using Apache web server.",
+    ],
+    features: [
+      "Can store Certificates which includes: Resolution (Title and Number), Images of the Document, Date Approved, and a Remark/Comment",
+      "Search through Resolutions using the Number, Title, or Date Approved within the Certificates",
+      "Export the images of the document into a single PDF",
+      "Admin: Can do Backup and Restore of the whole database (snapshot) which includes all of the images in a single ZIP file",
+      "Admin: Can add other 'Staff' accounts which have limited permissions",
+      "Admin: Can reset the password of any staff accounts",
+      "Forgot Password link is sent via Gmail for security",
+      "User Settings: User can change their own avatar, profile name, password, and email",
+    ],
+    links: [
+      new ProjectLink(
+        ProjectSite.GITHUB,
+        "https://github.com/christiankyle-ching/board_resolution_is"
+      ),
+    ],
+    media: [
+      new ProjectImage(img_boardResolutionIS_login, ""),
+      new ProjectImage(img_boardResolutionIS_certificate_view, ""),
+      new ProjectImage(img_boardResolutionIS_add_resolution, ""),
+      new ProjectImage(img_boardResolutionIS_resolutions, ""),
+      new ProjectImage(img_boardResolutionIS_backup_restore, ""),
+      new ProjectImage(img_boardResolutionIS_profile, ""),
+      new ProjectImage(img_boardResolutionIS_manage_users, ""),
+    ],
+  }),
+
   // John & Ruth Wedding
   new Project({
     id: "john-ruth-wedding",
@@ -588,16 +640,15 @@ const PROJECTS = [
   }),
 ];
 
-const PROJECTS_SORTED = PROJECTS.sort((a, b) => b.priority - a.priority).sort(
-  (a, b) => b.date_dev - a.date_dev
-);
+// Default Sorting (.sort implements in-place sorting)
+PROJECTS.sort((a, b) => b.date_dev - a.date_dev);
 
-const TOP_PROJECTS = PROJECTS_SORTED.sort(
-  (a, b) => b.priority - a.priority
-).filter((p) => p.priority > 0);
+const TOP_PROJECTS = [...PROJECTS]
+  .sort((a, b) => b.priority - a.priority)
+  .filter((p) => p.priority > 0);
 
 function getProjectByID(id) {
   return PROJECTS.find((p) => p.id === id);
 }
 
-export { PROJECTS, PROJECTS_SORTED, TOP_PROJECTS, getProjectByID };
+export { PROJECTS, TOP_PROJECTS, getProjectByID };
