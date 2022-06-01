@@ -131,7 +131,7 @@
       </div> -->
 
       <!-- For: Projects -->
-      <div v-for="project in TOP_PROJECTS">
+      <div v-for="project in TOP_PROJECTS.slice(0, 3)">
         <ProjectCard :project="project" />
       </div>
 

@@ -10,11 +10,24 @@
         <ProjectCard :project="p" />
       </div>
     </div>
+
+    <a
+      href="https://github.com/christiankyle-ching?tab=repositories"
+      target="_blank"
+      class="card h-full bg-_dark-red mt-2"
+    >
+      <div class="m-auto">
+        <span class="flex justify-between items-center gap-4">
+          <h5>View All Repositories at Github</h5>
+          <ArrowRightIcon />
+        </span>
+      </div>
+    </a>
   </div>
 </template>
 
 <script>
-import { PROJECTS_SORTED } from "@/assets/projects";
+import { PROJECTS } from "@/assets/projects";
 import ArrowRightIcon from "../components/icons/ArrowRightIcon.vue";
 import LoopingAnimator from "../components/LoopingAnimator.vue";
 import ProjectCard from "../components/ProjectCard.vue";
@@ -23,7 +36,7 @@ import BackButton from "../components/BackButton.vue";
 export default {
   data() {
     return {
-      projects: PROJECTS_SORTED,
+      projects: PROJECTS,
     };
   },
   components: { ArrowRightIcon, LoopingAnimator, ProjectCard, BackButton },
