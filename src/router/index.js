@@ -24,6 +24,9 @@ const router = createRouter({
       path: "/projects/",
       name: "projects",
       component: ProjectsView,
+      meta: {
+        title: "Projects",
+      },
     },
     {
       path: "/project/:id",
@@ -32,8 +35,27 @@ const router = createRouter({
     },
 
     // will match everything and put it under `$route.params.pathMatch`
-    { path: "/:pathMatch(.*)*", name: "NotFound", component: NotFound },
+    {
+      path: "/:pathMatch(.*)*",
+      name: "NotFound",
+      component: NotFound,
+      meta: {
+        noindex: true,
+      },
+    },
   ],
+});
+
+const DEFAULT_TITLE = import.meta.env.VITE_APP_TITLE;
+
+router.afterEach((to, from) => {
+  document.title = to.meta.title
+    ? `${to.meta.title} | ${DEFAULT_TITLE}`
+    : DEFAULT_TITLE;
+
+  document.querySelector("head > meta[name='robots']").content = to.meta.noindex
+    ? "noindex"
+    : "all";
 });
 
 export default router;
