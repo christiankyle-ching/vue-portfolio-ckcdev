@@ -173,7 +173,7 @@
         </p>
 
         <a
-          href="http://docs.google.com/document/d/1ZrY_BvP7HT8QPgeHsCmJgeVlVKdK5mvO26gGzG3LZ2M/export?format=pdf"
+          href="https://docs.google.com/document/d/1ZrY_BvP7HT8QPgeHsCmJgeVlVKdK5mvO26gGzG3LZ2M/export?format=pdf"
           class="button text-white !bg-_orange hover:!bg-_light-yellow hover:!text-_red-orange m-auto"
         >
           Download CV
