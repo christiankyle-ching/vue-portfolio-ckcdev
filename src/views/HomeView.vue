@@ -159,17 +159,25 @@
       <img
         src="@/assets/images/christian-kyle-ching.jpg"
         alt=""
-        class="rounded-full h-[40vh] lg:h-[50vh] object-cover object-center border-8 border-_orange mx-auto"
+        class="rounded-full w-64 lg:w-80 object-cover object-center border-8 border-_orange mx-auto"
       />
 
       <!-- Name and Introduction -->
       <article class="flex flex-col gap-4">
         <h2 class="text-center">Christian Kyle Ching</h2>
         <p>
-          I'm currently a graduating student in Bachelor of Science and
-          Information Technology in Pamantasan ng Lungsod ng Valenzuela
-          (Philippines).
+          I'm currently a <strong>graduating student of BSIT</strong> (Bachelor
+          of Science and Information Technology) in Pamantasan ng Lungsod ng
+          Valenzuela (Philippines). I'm currently looking for opportunity as an
+          <strong>Entry-Level Software Engineer</strong>.
         </p>
+
+        <a
+          href="http://docs.google.com/document/d/1ZrY_BvP7HT8QPgeHsCmJgeVlVKdK5mvO26gGzG3LZ2M/export?format=pdf"
+          class="button text-white !bg-_orange hover:!bg-_light-yellow hover:!text-_red-orange m-auto"
+        >
+          Download CV
+        </a>
       </article>
     </section>
 
