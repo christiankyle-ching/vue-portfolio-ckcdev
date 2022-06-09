@@ -7,6 +7,7 @@ import img_boardResolutionIS_manage_users from "@/assets/images/projects/board_r
 import img_boardResolutionIS_backup_restore from "@/assets/images/projects/board_resolution_is/backup_restore.png";
 import img_boardResolutionIS_resolutions from "@/assets/images/projects/board_resolution_is/resolutions.png";
 import img_boardResolutionIS_login from "@/assets/images/projects/board_resolution_is/login.png";
+import img_boardResolutionIS_ocr from "@/assets/images/projects/board_resolution_is/ocr.png";
 
 //#endregion
 
@@ -176,11 +177,12 @@ class ProjectLink {
 const PROJECTS = [
   // Board Resolution IS
   new Project({
+    hidden: true,
     id: "board_resolution_is",
     title: "PLV Board Resolution",
     date_dev: new Date(2022, 6, 2),
     stack: "Django, TailwindCSS",
-    priority: 5,
+    priority: 6,
     platform: "Web",
     descriptionParagraphs: [
       "This is a web-based information system project that I spearheaded (with a team of 8 other members), from the development up to the deployment. This system aims to store board resolutions passed by the Office of the President, Pamantasan ng Lungsod ng Valenzuela (my college institution).",
@@ -191,6 +193,7 @@ const PROJECTS = [
       "Can store Certificates which includes: Resolution (Title and Number), Images of the Document, Date Approved, and a Remark/Comment",
       "Search through Resolutions using the Number, Title, or Date Approved within the Certificates",
       "Export the images of the document into a single PDF",
+      "Can read contents of document (photo) using Tesseract OCR (for easier searching)",
       "Admin: Can do Backup and Restore of the whole database (snapshot) which includes all of the images in a single ZIP file",
       "Admin: Can add other 'Staff' accounts which have limited permissions",
       "Admin: Can reset the password of any staff accounts",
@@ -211,6 +214,7 @@ const PROJECTS = [
       new ProjectImage(img_boardResolutionIS_backup_restore, ""),
       new ProjectImage(img_boardResolutionIS_profile, ""),
       new ProjectImage(img_boardResolutionIS_manage_users, ""),
+      new ProjectImage(img_boardResolutionIS_ocr, ""),
     ],
   }),
 
@@ -220,7 +224,7 @@ const PROJECTS = [
     title: "John & Ruth Wedding RSVP",
     date_dev: new Date(2022, 1, 9),
     stack: "Vue.JS 3, Firebase, Bulma CSS",
-    priority: 5,
+    priority: 4,
     platform: "Web",
     descriptionParagraphs: [
       "This is an RSVP website I made for the wedding of Ms. Mary Ruth Babijis and Mr. John Paulo Robles.",
@@ -273,7 +277,7 @@ const PROJECTS = [
     title: "Bytes of Past",
     date_dev: new Date(2022, 0, 1),
     stack: "Unity, Mirror Networking, C#",
-    priority: 4,
+    priority: 3,
     platform: "Android",
     descriptionParagraphs: [
       "This is my Capstone Project as part of requirement of my Bachelor's Degree in Information Technology. Bytes of Past is an Android LAN Multiplayer Card Game built with Unity and Mirror Networking. This card game aims to be a supplementary gamified tool to teach ICT-related history inventions (courtesy of CHM).",
@@ -349,7 +353,7 @@ const PROJECTS = [
     title: "Digital Wellbeing For Windows",
     date_dev: new Date(2021, 7, 26),
     stack: "C#, WPF",
-    priority: 6,
+    priority: 5,
     platform: "Windows 10",
     descriptionParagraphs: [
       'Digital Wellbeing For Windows is a Windows app that is inspired by Android\'s app usage monitoring named, of course, "Digital Wellbeing". I found myself needing an app like this for Windows, but the options seemed to be too limited. Windows 10 has a built-in app for this called Microsoft Family, but it needs Microsoft Accounts to be set up and devices to be connected and be managed over the web.',
@@ -643,7 +647,9 @@ const PROJECTS = [
 // Default Sorting (.sort implements in-place sorting)
 PROJECTS.sort((a, b) => b.date_dev - a.date_dev);
 
-const TOP_PROJECTS = [...PROJECTS]
+const ACTIVE_PROJECTS = PROJECTS.filter((p) => !p.hidden);
+
+const TOP_PROJECTS = [...ACTIVE_PROJECTS]
   .sort((a, b) => b.priority - a.priority)
   .filter((p) => p.priority > 0);
 
@@ -651,4 +657,4 @@ function getProjectByID(id) {
   return PROJECTS.find((p) => p.id === id);
 }
 
-export { PROJECTS, TOP_PROJECTS, getProjectByID };
+export { PROJECTS, TOP_PROJECTS, ACTIVE_PROJECTS, getProjectByID };

@@ -1,8 +1,8 @@
 https://ckcdev.vercel.app/
 https://ckcdev.vercel.app/projects/
-https://ckcdev.vercel.app/project/digital-wellbeing-windows
 https://ckcdev.vercel.app/project/john-ruth-wedding
 https://ckcdev.vercel.app/project/bytes-of-past
+https://ckcdev.vercel.app/project/digital-wellbeing-windows
 https://ckcdev.vercel.app/project/fomo_reservation
 https://ckcdev.vercel.app/project/nasa_apod
 https://ckcdev.vercel.app/project/roomfiles

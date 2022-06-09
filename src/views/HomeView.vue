@@ -131,11 +131,15 @@
       </div> -->
 
       <!-- For: Projects -->
-      <div v-for="project in TOP_PROJECTS.slice(0, 3)">
+      <div v-for="project in visibleProjects">
         <ProjectCard :project="project" />
       </div>
 
-      <RouterLink :to="{ name: 'projects' }" class="card h-full bg-_dark-red">
+      <RouterLink
+        :to="{ name: 'projects' }"
+        class="card h-full bg-_dark-red"
+        :class="{ 'col-span-full': visibleProjects.length % 2 == 0 }"
+      >
         <div class="m-auto">
           <span class="flex justify-between items-center gap-4">
             <h5>View All Projects</h5>
@@ -281,6 +285,9 @@ import ArrowRightIcon from "../components/icons/ArrowRightIcon.vue";
 import PhoneIcon from "../components/icons/PhoneIcon.vue";
 import UserIcon from "../components/icons/UserIcon.vue";
 import ProjectCard from "../components/ProjectCard.vue";
+
+const MAX_NUMBER_OF_PROJECTS = 4;
+const visibleProjects = TOP_PROJECTS.slice(0, MAX_NUMBER_OF_PROJECTS);
 </script>
 
 <style></style>
