@@ -177,7 +177,6 @@ class ProjectLink {
 const PROJECTS = [
   // Board Resolution IS
   new Project({
-    hidden: true,
     id: "board_resolution_is",
     title: "PLV Board Resolution",
     date_dev: new Date(2022, 6, 2),
