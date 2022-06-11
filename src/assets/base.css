@@ -104,8 +104,26 @@ p a {
   }
 }
 
+.spinner__container {
+  @apply flex !absolute left-0 top-0 w-full h-full bg-white -z-10;
+}
+
 .spinner {
-  @apply h-10 w-10 border-[6px] animate-spin rounded-full m-auto border-r-transparent border-_teal block;
+  @apply h-10 w-10 border-[6px] animate-spin rounded-full m-auto !border-r-transparent border-_teal block;
+}
+
+/* SwiperJS */
+
+.swiper {
+  @apply cursor-grab;
+}
+
+.swiper:active {
+  @apply !cursor-grabbing;
+}
+
+.swiper {
+  @apply select-none;
 }
 
 /* #region Cards */
