@@ -3,13 +3,15 @@
     <main class="min-h-screen">
       <!-- Top Column -->
       <div class="flex justify-center items-center !h-[35vh]">
-        <h2>ckching.dev</h2>
+        <div class="scale-on-scroll">
+          <h2>ckching.dev</h2>
+        </div>
       </div>
 
       <!-- Bottom Column : Cards -->
       <div class="cards-group grid grid-cols-1 lg:grid-cols-2 gap-2">
         <!-- Main Card -->
-        <button class="card !h-[65vh] h-full bg-_teal group">
+        <button class="card !h-[65vh] bg-_teal group">
           <header class="text-left">
             <h3>Portfolio</h3>
           </header>
@@ -41,7 +43,7 @@
                   <img
                     src="@/assets/images/firebase.png"
                     alt="Vue"
-                    class="min-w-[3rem] rounded-lg p-2 bg-white p-2"
+                    class="min-w-[3rem] rounded-lg p-2 bg-white"
                   />
                   <div class="bg-white text-purple-800 rounded-lg p-2">
                     <span class="text-4xl font-bold">C#</span>

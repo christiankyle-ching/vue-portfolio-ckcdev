@@ -3,7 +3,7 @@
     <BackButton />
 
     <div class="h-[35vh] flex">
-      <h1 class="m-auto">Projects</h1>
+      <h1 class="m-auto scale-on-scroll">Projects</h1>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
       <div v-for="p in projects">

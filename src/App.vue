@@ -9,18 +9,42 @@
 </template>
 
 <script>
-import { isInViewport, addClassIfInViewport } from "@/utils.js";
+import { isInViewport, addClassIfInViewport, animateOnScroll } from "./utils";
 import _ from "lodash";
 
 import "./firebase";
 
 export default {
   mounted() {
+    // Show Cards on Scroll
     window.addEventListener(
       "scroll",
       _.throttle(() => {
         addClassIfInViewport(".card:not(.active)", "active");
       }, 150)
+    );
+
+    // Scale Elements on Scroll
+    const threshold = 75;
+    window.addEventListener(
+      "scroll",
+      _.throttle(() => {
+        // document.querySelectorAll(".scale-on-scroll").forEach((el) => {
+        //   const elTop = el.getBoundingClientRect().top;
+        //   let percentage = elTop / threshold;
+        //   // Limit lower
+        //   percentage = percentage > 0 ? percentage : 0;
+        //   // Limit upper
+        //   percentage = percentage < 1 ? percentage : 1;
+        //   el.style.transform = `scale(${percentage})`;
+        //   el.style.opacity = `${percentage}`;
+        // });
+
+        animateOnScroll(".scale-on-scroll", {
+          transformScale: true,
+          scrollThreshold: 75,
+        });
+      }, 16.67)
     );
   },
   watch: {

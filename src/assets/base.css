@@ -193,4 +193,8 @@ button.card.active:hover {
 }
 /* #endregion */
 
+[class$="-on-scroll"] {
+  will-change: transform, opacity;
+}
+
 /* #endregion */

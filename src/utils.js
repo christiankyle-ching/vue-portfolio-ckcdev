@@ -28,4 +28,35 @@ function addClassIfInViewport(selector, ...classes) {
   });
 }
 
-export { isInViewport, addClassIfInViewport };
+function animateOnScroll(
+  selector,
+  { transformScale, transformRotate, transformOpacity, scrollThreshold }
+) {
+  // Default Options
+  transformScale ??= false;
+  transformRotate ??= false;
+  transformOpacity ??= true;
+  scrollThreshold ??= 50;
+
+  document.querySelectorAll(selector).forEach((el) => {
+    const elTop = el.getBoundingClientRect().top;
+
+    let percentage = elTop / scrollThreshold;
+    // Limit lower
+    percentage = percentage > 0 ? percentage : 0;
+    // Limit upper
+    percentage = percentage < 1 ? percentage : 1;
+
+    let transforms = [];
+    if (transformScale) transforms.push(`scale(${percentage})`);
+    if (transformRotate) transforms.push(`rotate(${percentage * 365}deg)`);
+
+    el.style.transform = transforms.join(" ");
+
+    if (transformOpacity) {
+      el.style.opacity = `${percentage}`;
+    }
+  });
+}
+
+export { isInViewport, addClassIfInViewport, animateOnScroll };
