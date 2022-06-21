@@ -1,5 +1,6 @@
 https://ckcdev.vercel.app/
 https://ckcdev.vercel.app/projects/
+https://ckcdev.vercel.app/project/board_resolution_is
 https://ckcdev.vercel.app/project/john-ruth-wedding
 https://ckcdev.vercel.app/project/bytes-of-past
 https://ckcdev.vercel.app/project/digital-wellbeing-windows
