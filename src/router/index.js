@@ -50,7 +50,7 @@ const DEFAULT_TITLE = import.meta.env.VITE_APP_TITLE;
 
 router.afterEach((to, from) => {
   document.title = to.meta.title
-    ? `${to.meta.title} | ${DEFAULT_TITLE}`
+    ? `${to.meta.title} - ${DEFAULT_TITLE}`
     : DEFAULT_TITLE;
 
   document.querySelector("head > meta[name='robots']").content = to.meta.noindex

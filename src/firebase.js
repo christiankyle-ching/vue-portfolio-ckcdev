@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -16,12 +16,20 @@ const firebaseConfig = {
   measurementId: "G-1NPJTZ5YNR",
 };
 
+// Try Initialize Analytics
+const initAnalytics = async () => {
+  if (process.env.NODE_ENV !== "development") {
+    try {
+      const { getAnalytics } = await import("firebase/analytics");
+      analytics = getAnalytics(app);
+    } catch {
+      // Blocked by client
+    }
+  }
+};
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-let analytics;
+initAnalytics();
 
-if (process.env.NODE_ENV !== "development") {
-  analytics = getAnalytics(app);
-}
-
-export { app, analytics };
+export { app };

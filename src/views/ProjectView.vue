@@ -92,6 +92,7 @@ import ArrowLeftIcon from "../components/icons/ArrowLeftIcon.vue";
 import ShareIcon from "../components/icons/ShareIcon.vue";
 import BackButton from "../components/BackButton.vue";
 import ProjectImages from "../components/ProjectImages.vue";
+import { nextTick } from "vue";
 
 export default {
   data() {
@@ -125,6 +126,12 @@ export default {
   },
   mounted() {
     this.project = getProjectByID(this.$route.params.id);
+
+    if (!this.project) this.$router.push({ name: "NotFound" });
+
+    nextTick(() => {
+      document.title = `${this.project.title} - ${document.title}`;
+    });
   },
   computed: {
     showImages() {
