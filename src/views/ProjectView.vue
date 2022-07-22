@@ -70,7 +70,9 @@
             class="button flex-grow justify-center"
           >
             <ProjectIcon :site="link.site" />
-            <span class="capitalize">{{ link.site }}</span>
+            <span class="capitalize">{{
+              link.label ? link.label : link.site
+            }}</span>
           </a>
           <button @click="share" class="button flex-grow justify-center">
             <ShareIcon />

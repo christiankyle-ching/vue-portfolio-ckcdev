@@ -166,10 +166,11 @@ const ProjectSite = Object.freeze({
 });
 
 class ProjectLink {
-  constructor(site, url, disabled = false) {
+  constructor(site, url, label = "", disabled = false) {
     this.site = site;
     this.url = url;
     this.disabled = disabled;
+    this.label = label;
   }
 }
 //#endregion
@@ -430,7 +431,13 @@ const PROJECTS = [
       ),
       new ProjectLink(
         ProjectSite.GITHUB,
-        "https://github.com/christiankyle-ching/FOMO-Reservation"
+        "https://github.com/christiankyle-ching/FOMO-Reservation",
+        "Github (Front-End Vue.JS 3)"
+      ),
+      new ProjectLink(
+        ProjectSite.GITHUB,
+        "https://github.com/christiankyle-ching/FOMO-Reservation",
+        "Github (Serverless Functions)"
       ),
     ],
     media: [
