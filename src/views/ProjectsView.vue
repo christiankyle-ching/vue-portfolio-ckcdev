@@ -13,7 +13,7 @@
       <a
         href="https://github.com/christiankyle-ching?tab=repositories"
         target="_blank"
-        class="card h-full bg-_dark-red mt-2"
+        class="card h-full bg-_dark-red"
         :class="{ 'col-span-full': projects.length % 2 == 0 }"
       >
         <div class="m-auto">

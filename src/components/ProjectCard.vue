@@ -4,7 +4,8 @@
     class="card h-full bg-red-200 text-_black card--bg-hover"
   >
     <header>
-      <h5>{{ project.title }}</h5>
+      <h5 class="font-bold">{{ project.title }}</h5>
+      <p class="text-sm">{{ project.platform }} | {{ project.stack }}</p>
     </header>
 
     <div class="card__background flex relative">

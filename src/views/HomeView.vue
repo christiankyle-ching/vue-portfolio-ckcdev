@@ -92,27 +92,27 @@
                     <img
                       src="@/assets/images/projects/roomfiles/logo.jpg"
                       alt="RoomFiles"
-                      class="h-16 w-16 rounded-lg bg-white"
+                      class="h-14 w-14 md:h-16 md:w-16 rounded-lg bg-white"
                     />
                     <img
                       src="@/assets/images/projects/nasa_apod/logo.png"
                       alt="NASA's APOD"
-                      class="h-16 w-16 rounded-lg bg-white"
+                      class="h-14 w-14 md:h-16 md:w-16 rounded-lg bg-white"
                     />
                     <img
                       src="@/assets/images/projects/digital-wellbeing-windows/logo.png"
                       alt="Digital Wellbeing for Windows"
-                      class="h-16 w-16 rounded-lg bg-white"
+                      class="h-14 w-14 md:h-16 md:w-16 rounded-lg bg-white"
                     />
                     <img
                       src="@/assets/images/projects/bytes-of-past/logo.png"
                       alt="Bytes of Past"
-                      class="h-16 w-16 rounded-lg bg-white"
+                      class="h-14 w-14 md:h-16 md:w-16 rounded-lg bg-white"
                     />
                     <img
                       src="@/assets/images/projects/budget/logo.jpg"
                       alt="Budget Planner"
-                      class="h-16 w-16 rounded-lg bg-white"
+                      class="h-14 w-14 md:h-16 md:w-16 rounded-lg bg-white"
                     />
                   </div>
                 </LoopingAnimator>
