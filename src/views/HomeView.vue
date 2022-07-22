@@ -9,9 +9,9 @@
       </div>
 
       <!-- Bottom Column : Cards -->
-      <div class="cards-group grid grid-cols-1 lg:grid-cols-2 gap-2">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
         <!-- Main Card -->
-        <button class="card !h-[65vh] bg-_teal group">
+        <button ref="main-card" class="card !h-[65vh] bg-_teal group">
           <header class="text-left">
             <h3>Portfolio</h3>
           </header>
@@ -68,17 +68,55 @@
 
         <div id="more-links" class="grid grid-cols-2 grid-rows-2 gap-2">
           <!-- Projects -->
-          <a
-            href="#top-projects"
-            class="card bg-_dark-red card--bg-hover col-span-full group"
-          >
-            <header>
+          <a href="#top-projects" class="card bg-_dark-red col-span-full group">
+            <header class="group-hover:opacity-0 transition-opacity">
               <h6>Projects</h6>
             </header>
-            <div class="card__background flex">
-              <LoopingAnimator class="m-auto">
-                <span class="text-2xl lg:text-4xl">View my works.&nbsp;</span>
-              </LoopingAnimator>
+            <div class="card__background flex group">
+              <!-- View My Works -->
+              <div
+                class="absolute flex top-0 bottom-0 left-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                <LoopingAnimator class="m-auto">
+                  <span class="text-2xl lg:text-4xl">View my works.&nbsp;</span>
+                </LoopingAnimator>
+              </div>
+
+              <!-- Project Logos -->
+              <div
+                ref="project-logos"
+                class="flex group-hover:opacity-0 transition-opacity"
+              >
+                <LoopingAnimator class="m-auto">
+                  <div class="grid grid-cols-[repeat(5,5rem)] gap-8 pr-8">
+                    <img
+                      src="@/assets/images/projects/roomfiles/logo.jpg"
+                      alt="RoomFiles"
+                      class="h-16 w-16 rounded-lg bg-white"
+                    />
+                    <img
+                      src="@/assets/images/projects/nasa_apod/logo.png"
+                      alt="NASA's APOD"
+                      class="h-16 w-16 rounded-lg bg-white"
+                    />
+                    <img
+                      src="@/assets/images/projects/digital-wellbeing-windows/logo.png"
+                      alt="Digital Wellbeing for Windows"
+                      class="h-16 w-16 rounded-lg bg-white"
+                    />
+                    <img
+                      src="@/assets/images/projects/bytes-of-past/logo.png"
+                      alt="Bytes of Past"
+                      class="h-16 w-16 rounded-lg bg-white"
+                    />
+                    <img
+                      src="@/assets/images/projects/budget/logo.jpg"
+                      alt="Budget Planner"
+                      class="h-16 w-16 rounded-lg bg-white"
+                    />
+                  </div>
+                </LoopingAnimator>
+              </div>
             </div>
             <!-- <footer>
               <a class="flex justify-between items-center">
@@ -282,7 +320,7 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import { TOP_PROJECTS } from "@/assets/projects.js";
 
 import LoopingAnimator from "../components/LoopingAnimator.vue";
@@ -298,6 +336,37 @@ import ProjectCard from "../components/ProjectCard.vue";
 
 const MAX_NUMBER_OF_PROJECTS = 4;
 const visibleProjects = TOP_PROJECTS.slice(0, MAX_NUMBER_OF_PROJECTS);
+
+export default {
+  components: {
+    LoopingAnimator,
+    ArrowDownIcon,
+    GithubIcon,
+    LinkedinIcon,
+    EmailIcon,
+    FacebookIcon,
+    ArrowRightIcon,
+    PhoneIcon,
+    UserIcon,
+    ProjectCard,
+  },
+  data() {
+    return {
+      MAX_NUMBER_OF_PROJECTS: 4,
+      visibleProjects: visibleProjects,
+    };
+  },
+  mounted() {
+    this.$refs["main-card"].addEventListener("mouseenter", () => {
+      console.log("enter");
+      this.$refs["project-logos"].classList.add("opacity-0");
+    });
+
+    this.$refs["main-card"].addEventListener("mouseleave", () => {
+      this.$refs["project-logos"].classList.remove("opacity-0");
+    });
+  },
+};
 </script>
 
 <style></style>
