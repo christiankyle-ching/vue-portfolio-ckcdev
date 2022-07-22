@@ -5,6 +5,9 @@
       :breakpoints="{
         768: {
           slidesPerView: 2,
+          navigation: {
+            enabled: true,
+          },
         },
       }"
       :space-between="30"
@@ -14,6 +17,9 @@
         enabled: true,
         pauseOnMouseEnter: true,
         disableOnInteraction: false,
+      }"
+      :navigation="{
+        enabled: false,
       }"
       :loop="true"
       class="h-[50vh] w-full"
@@ -37,11 +43,12 @@
       </SwiperSlide>
     </Swiper>
 
-    <div class="flex mt-2 text-sm flex-col md:flex-row">
+    <div class="flex mt-2 text-xs flex-col md:flex-row">
       <p class="flex-grow basis-0 text-center md:text-right">
-        Swipe to see more
+        <span class="md:hidden">Swipe to see more</span>
+        <span class="hidden md:inline">Use the arrow buttons</span>
       </p>
-      <span class="mx-4 text-center">or</span>
+      <span class="mx-4 text-center hidden md:inline"> | </span>
       <p class="flex-grow basis-0 text-center md:text-left">
         Click to open full image
       </p>
@@ -52,15 +59,16 @@
 <script>
 import LoopingAnimator from "./LoopingAnimator.vue";
 
-import { SwiperSlide, Swiper } from "swiper/vue";
-import SwiperCore, { Pagination, FreeMode, Autoplay } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/vue";
+import SwiperCore, { Pagination, FreeMode, Autoplay, Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/free-mode";
 import "swiper/css/autoplay";
+import "swiper/css/navigation";
 
 // Swiper Modules
-SwiperCore.use([Pagination, FreeMode, Autoplay]);
+SwiperCore.use([Pagination, FreeMode, Autoplay, Navigation]);
 
 export default {
   props: {
@@ -80,5 +88,25 @@ export default {
 <style>
 .swiper-pagination-bullet-active {
   @apply !bg-_dark-teal;
+}
+
+/* Custom Swiper Next and Prev Buttons */
+.swiper-button-prev,
+.swiper-button-next {
+  @apply w-12 h-12  rounded-full flex shadow-md;
+  @apply bg-_yellow hover:bg-_teal  text-_teal hover:text-_yellow transition-colors;
+}
+
+.swiper-button-prev {
+  @apply pr-1;
+}
+
+.swiper-button-next {
+  @apply pl-1;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  @apply drop-shadow-md text-2xl font-black m-auto;
 }
 </style>
