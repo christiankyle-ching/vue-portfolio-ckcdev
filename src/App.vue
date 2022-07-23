@@ -29,17 +29,6 @@ export default {
     window.addEventListener(
       "scroll",
       _.throttle(() => {
-        // document.querySelectorAll(".scale-on-scroll").forEach((el) => {
-        //   const elTop = el.getBoundingClientRect().top;
-        //   let percentage = elTop / threshold;
-        //   // Limit lower
-        //   percentage = percentage > 0 ? percentage : 0;
-        //   // Limit upper
-        //   percentage = percentage < 1 ? percentage : 1;
-        //   el.style.transform = `scale(${percentage})`;
-        //   el.style.opacity = `${percentage}`;
-        // });
-
         animateOnScroll(".scale-on-scroll", {
           transformScale: true,
           scrollThreshold: 75,

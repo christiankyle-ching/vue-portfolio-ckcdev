@@ -132,7 +132,22 @@ export default {
     if (!this.project) this.$router.push({ name: "NotFound" });
 
     nextTick(() => {
+      // Set Title
       document.title = `${this.project.title} - ${document.title}`;
+
+      // Set Open Graph Tags
+      // og:image
+      document.querySelector(
+        "head > meta[property='og:image']"
+      ).content = `/static/images/projects/${this.project.id}.jpg`;
+
+      // og:title
+      document.querySelector("head > meta[property='og:title']").content =
+        this.project.title ?? "";
+
+      // og:description
+      document.querySelector("head > meta[property='og:description']").content =
+        this.project.descriptionParagraphs[0] ?? "";
     });
   },
   computed: {

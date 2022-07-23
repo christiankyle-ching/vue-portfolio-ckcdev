@@ -46,16 +46,37 @@ const router = createRouter({
   ],
 });
 
+// Default Values
 const DEFAULT_TITLE = import.meta.env.VITE_APP_TITLE;
+const DEFAULT_OG_IMAGE = "/static/images/og-image.png";
+const DEFAULT_OG_TITLE = "Portfolio - Christian Kyle Ching";
+const DEFAULT_OG_DESCRIPTION =
+  "Personal Portfolio of Christian Kyle Ching in Web / App Development";
 
 router.afterEach((to, from) => {
   document.title = to.meta.title
     ? `${to.meta.title} - ${DEFAULT_TITLE}`
     : DEFAULT_TITLE;
 
+  // Set pages with meta.noindex
   document.querySelector("head > meta[name='robots']").content = to.meta.noindex
     ? "noindex"
     : "all";
+
+  // Change Open Graph tags to default if not in project view
+  if (to.name != "project") {
+    // og:image
+    document.querySelector("head > meta[property='og:image']").content =
+      DEFAULT_OG_IMAGE;
+
+    // og:title
+    document.querySelector("head > meta[property='og:title']").content =
+      DEFAULT_OG_TITLE;
+
+    // og:description
+    document.querySelector("head > meta[property='og:description']").content =
+      DEFAULT_OG_DESCRIPTION;
+  }
 });
 
 export default router;
