@@ -1,8 +1,12 @@
 <template>
   <div>
     <Swiper
+      @swiper="onInitSwiper"
       :slides-per-view="1"
       :breakpoints="{
+        0: {
+          slidesPerView: 1,
+        },
         768: {
           slidesPerView: 2,
           navigation: {
@@ -11,17 +15,15 @@
         },
       }"
       :space-between="30"
-      :pagination="true"
+      pagination
       :free-mode="{ enabled: true, sticky: false, momentum: true }"
       :autoplay="{
         enabled: true,
         pauseOnMouseEnter: true,
         disableOnInteraction: false,
       }"
-      :navigation="{
-        enabled: false,
-      }"
-      :loop="true"
+      navigation
+      loop
       class="h-[50vh] w-full"
     >
       <SwiperSlide v-for="image in project.images">
@@ -58,6 +60,7 @@
 
 <script>
 import LoopingAnimator from "./LoopingAnimator.vue";
+import { nextTick } from "@vue/runtime-core";
 
 import { Swiper, SwiperSlide } from "swiper/vue";
 import SwiperCore, { Pagination, FreeMode, Autoplay, Navigation } from "swiper";
@@ -81,6 +84,22 @@ export default {
 
     SwiperSlide,
     Swiper,
+  },
+  mounted() {},
+  methods: {
+    onInitSwiper(e) {
+      console.log(e);
+      e.navigation.update();
+      // SwiperJS not using value of navigation.enabled on init
+      // https://github.com/nolimits4web/swiper/issues/4052
+      nextTick(() => {
+        if (window.innerWidth >= 768) {
+          e.navigation.enable();
+        } else {
+          e.navigation.disable();
+        }
+      });
+    },
   },
 };
 </script>
