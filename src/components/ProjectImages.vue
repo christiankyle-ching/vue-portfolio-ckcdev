@@ -88,7 +88,6 @@ export default {
   mounted() {},
   methods: {
     onInitSwiper(e) {
-      console.log(e);
       e.navigation.update();
       // SwiperJS not using value of navigation.enabled on init
       // https://github.com/nolimits4web/swiper/issues/4052

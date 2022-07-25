@@ -88,31 +88,31 @@
                 class="flex group-hover:opacity-0 transition-opacity"
               >
                 <LoopingAnimator class="m-auto">
-                  <div class="grid grid-cols-[repeat(5,5rem)] gap-8 pr-8">
+                  <div class="grid grid-cols-[repeat(5,5rem)] gap-4 pr-4">
                     <img
                       src="@/assets/images/projects/roomfiles/logo.jpg"
                       alt="RoomFiles"
-                      class="h-14 w-14 md:h-16 md:w-16 rounded-lg bg-white"
+                      class="h-12 w-12 md:h-16 md:w-16 rounded-lg bg-white"
                     />
                     <img
                       src="@/assets/images/projects/nasa_apod/logo.png"
                       alt="NASA's APOD"
-                      class="h-14 w-14 md:h-16 md:w-16 rounded-lg bg-white"
+                      class="h-12 w-12 md:h-16 md:w-16 rounded-lg bg-white"
                     />
                     <img
                       src="@/assets/images/projects/digital-wellbeing-windows/logo.png"
                       alt="Digital Wellbeing for Windows"
-                      class="h-14 w-14 md:h-16 md:w-16 rounded-lg bg-white"
+                      class="h-12 w-12 md:h-16 md:w-16 rounded-lg bg-white"
                     />
                     <img
                       src="@/assets/images/projects/bytes-of-past/logo.png"
                       alt="Bytes of Past"
-                      class="h-14 w-14 md:h-16 md:w-16 rounded-lg bg-white"
+                      class="h-12 w-12 md:h-16 md:w-16 rounded-lg bg-white"
                     />
                     <img
                       src="@/assets/images/projects/budget/logo.jpg"
                       alt="Budget Planner"
-                      class="h-14 w-14 md:h-16 md:w-16 rounded-lg bg-white"
+                      class="h-12 w-12 md:h-16 md:w-16 rounded-lg bg-white"
                     />
                   </div>
                 </LoopingAnimator>
@@ -205,14 +205,10 @@
       <!-- Name and Introduction -->
       <article class="flex flex-col gap-4">
         <h2 class="text-center">Christian Kyle Ching</h2>
-        <p>
-          I'm currently a <strong>graduating student of BSIT</strong> (Bachelor
-          of Science and Information Technology) in Pamantasan ng Lungsod ng
-          Valenzuela (Philippines). I'm currently looking for opportunity as an
-          <strong>Entry-Level Software Engineer</strong>.
-        </p>
+        <p v-for="p in SELF_DESCRIPTION_PARAGRAPHS" v-html="p"></p>
 
         <a
+          v-if="AVAILABLE_FOR_WORK"
           href="https://docs.google.com/document/d/1ZrY_BvP7HT8QPgeHsCmJgeVlVKdK5mvO26gGzG3LZ2M/export?format=pdf"
           class="button text-white !bg-_orange hover:!bg-_light-yellow hover:!text-_red-orange m-auto"
         >
@@ -225,7 +221,10 @@
       <div class="card bg-_teal">
         <header class="m-auto">
           <h2>
-            <strong>I'm open for new opportunities!</strong>
+            <strong v-if="AVAILABLE_FOR_WORK">
+              I'm open for new opportunities!
+            </strong>
+            <strong v-else> Have something in mind? </strong>
             You can reach me at my links below.
           </h2>
         </header>
@@ -322,6 +321,10 @@
 
 <script>
 import { TOP_PROJECTS } from "@/assets/projects.js";
+import {
+  AVAILABLE_FOR_WORK,
+  SELF_DESCRIPTION_PARAGRAPHS,
+} from "@/assets/aboutMe.js";
 
 import LoopingAnimator from "../components/LoopingAnimator.vue";
 import ArrowDownIcon from "../components/icons/ArrowDownIcon.vue";
@@ -352,8 +355,10 @@ export default {
   },
   data() {
     return {
-      MAX_NUMBER_OF_PROJECTS: 4,
+      MAX_NUMBER_OF_PROJECTS: MAX_NUMBER_OF_PROJECTS,
       visibleProjects: visibleProjects,
+      AVAILABLE_FOR_WORK: AVAILABLE_FOR_WORK,
+      SELF_DESCRIPTION_PARAGRAPHS: SELF_DESCRIPTION_PARAGRAPHS,
     };
   },
   mounted() {
