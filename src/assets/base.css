@@ -13,7 +13,7 @@ html {
 body {
   font-family: "Poppins", sans-serif;
 
-  @apply bg-_black text-white;
+  @apply bg-_black text-slate-50;
 }
 
 /* #region Scroll Bar */

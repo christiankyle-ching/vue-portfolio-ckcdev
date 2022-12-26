@@ -18,10 +18,10 @@ const firebaseConfig = {
 
 // Try Initialize Analytics
 const initAnalytics = async () => {
-  if (process.env.NODE_ENV !== "development") {
+  if (import.meta.env.MODE !== "development") {
     try {
       const { getAnalytics } = await import("firebase/analytics");
-      analytics = getAnalytics(app);
+      getAnalytics(app);
     } catch {
       // Blocked by client
     }

@@ -27,19 +27,20 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 import { PROJECTS, ACTIVE_PROJECTS } from "@/assets/projects";
 import ArrowRightIcon from "../components/icons/ArrowRightIcon.vue";
 import LoopingAnimator from "../components/LoopingAnimator.vue";
 import ProjectCard from "../components/ProjectCard.vue";
 import BackButton from "../components/BackButton.vue";
 
-export default {
+export default defineComponent({
   data() {
     return {
       projects: ACTIVE_PROJECTS,
     };
   },
   components: { ArrowRightIcon, LoopingAnimator, ProjectCard, BackButton },
-};
+});
 </script>

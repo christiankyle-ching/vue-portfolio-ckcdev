@@ -8,42 +8,47 @@
   </div>
 </template>
 
-<script>
-import { isInViewport, addClassIfInViewport, animateOnScroll } from "./utils";
-import _ from "lodash";
-
+<script lang="ts">
+import { defineComponent, onMounted, watch } from "vue";
+import { addClassIfInViewport, animateOnScroll } from "./utils";
+import throttle from "lodash/throttle";
+import { useRoute } from "vue-router";
 import "./firebase";
 
-export default {
-  mounted() {
-    // Show Cards on Scroll
-    window.addEventListener(
-      "scroll",
-      _.throttle(() => {
-        addClassIfInViewport(".card:not(.active)", "active");
-      }, 150)
-    );
+export type EventListener = (this: Window, ev: Event) => void;
 
-    // Scale Elements on Scroll
-    const threshold = 75;
-    window.addEventListener(
-      "scroll",
-      _.throttle(() => {
-        animateOnScroll(".scale-on-scroll", {
-          transformScale: true,
-          scrollThreshold: 75,
-        });
-      }, 16.67)
-    );
-  },
-  watch: {
-    $route(to, from) {
+export default defineComponent({
+  setup() {
+    const route = useRoute();
+
+    onMounted(() => {
+      // Show Cards on Scroll
+      window.addEventListener(
+        "scroll",
+        throttle(() => {
+          addClassIfInViewport(".card:not(.active)", "active");
+        }, 150) as EventListener
+      );
+
+      // Scale Elements on Scroll
+      window.addEventListener(
+        "scroll",
+        throttle(() => {
+          animateOnScroll(".scale-on-scroll", {
+            transformScale: true,
+            scrollThreshold: 75,
+          });
+        }, 16.67) as EventListener
+      );
+    });
+
+    watch([route], () => {
       setTimeout(() => {
         addClassIfInViewport(".card:not(.active)", "active");
       }, 1000);
-    },
+    });
   },
-};
+});
 </script>
 
 <style>

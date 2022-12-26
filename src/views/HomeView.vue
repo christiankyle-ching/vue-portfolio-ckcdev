@@ -11,7 +11,7 @@
       <!-- Bottom Column : Cards -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
         <!-- Main Card -->
-        <button ref="main-card" class="card !h-[65vh] bg-_teal group">
+        <button ref="mainCardRef" class="card !h-[65vh] bg-_teal group">
           <header class="text-left">
             <h3>Portfolio</h3>
           </header>
@@ -84,7 +84,7 @@
 
               <!-- Project Logos -->
               <div
-                ref="project-logos"
+                ref="projectLogosRef"
                 class="flex group-hover:opacity-0 transition-opacity"
               >
                 <LoopingAnimator class="m-auto">
@@ -204,13 +204,24 @@
 
       <!-- Name and Introduction -->
       <article class="flex flex-col gap-4">
-        <h2 class="text-center">Christian Kyle Ching</h2>
+        <!-- Header -->
+        <div>
+          <!-- Name -->
+          <h2 class="text-center">
+            <strong> Christian Kyle Ching </strong>
+          </h2>
+
+          <!-- Current Status -->
+          <p v-html="CURRENT_STATUS" class="text-center"></p>
+        </div>
+
+        <!-- Description paragraphs -->
         <p v-for="p in SELF_DESCRIPTION_PARAGRAPHS" v-html="p"></p>
 
         <a
           v-if="AVAILABLE_FOR_WORK"
           href="https://docs.google.com/document/d/1ZrY_BvP7HT8QPgeHsCmJgeVlVKdK5mvO26gGzG3LZ2M/export?format=pdf"
-          class="button text-white !bg-_orange hover:!bg-_light-yellow hover:!text-_red-orange m-auto"
+          class="button text-slate-50 !bg-_orange hover:!bg-_light-yellow hover:!text-_red-orange m-auto"
         >
           Download CV
         </a>
@@ -319,12 +330,14 @@
   </div>
 </template>
 
-<script>
-import { TOP_PROJECTS } from "@/assets/projects.js";
+<script lang="ts">
+import { defineComponent, onMounted, ref } from "vue";
+import { TOP_PROJECTS } from "../assets/projects";
 import {
   AVAILABLE_FOR_WORK,
   SELF_DESCRIPTION_PARAGRAPHS,
-} from "@/assets/aboutMe.js";
+  CURRENT_STATUS,
+} from "../assets/aboutMe";
 
 import LoopingAnimator from "../components/LoopingAnimator.vue";
 import ArrowDownIcon from "../components/icons/ArrowDownIcon.vue";
@@ -340,7 +353,7 @@ import ProjectCard from "../components/ProjectCard.vue";
 const MAX_NUMBER_OF_PROJECTS = 4;
 const visibleProjects = TOP_PROJECTS.slice(0, MAX_NUMBER_OF_PROJECTS);
 
-export default {
+export default defineComponent({
   components: {
     LoopingAnimator,
     ArrowDownIcon,
@@ -353,25 +366,35 @@ export default {
     UserIcon,
     ProjectCard,
   },
-  data() {
-    return {
-      MAX_NUMBER_OF_PROJECTS: MAX_NUMBER_OF_PROJECTS,
-      visibleProjects: visibleProjects,
-      AVAILABLE_FOR_WORK: AVAILABLE_FOR_WORK,
-      SELF_DESCRIPTION_PARAGRAPHS: SELF_DESCRIPTION_PARAGRAPHS,
-    };
-  },
-  mounted() {
-    this.$refs["main-card"].addEventListener("mouseenter", () => {
-      console.log("enter");
-      this.$refs["project-logos"].classList.add("opacity-0");
+  setup() {
+    const mainCardRef = ref<HTMLElement | null>(null);
+    const projectLogosRef = ref<HTMLElement | null>(null);
+
+    onMounted(() => {
+      const mainCard = mainCardRef.value;
+      const projectLogos = projectLogosRef.value;
+
+      if (mainCard && projectLogos) {
+        mainCard.addEventListener("mouseenter", () => {
+          console.log("enter");
+          projectLogos.classList.add("opacity-0");
+        });
+
+        mainCard.addEventListener("mouseleave", () => {
+          projectLogos.classList.remove("opacity-0");
+        });
+      }
     });
 
-    this.$refs["main-card"].addEventListener("mouseleave", () => {
-      this.$refs["project-logos"].classList.remove("opacity-0");
-    });
+    return {
+      MAX_NUMBER_OF_PROJECTS,
+      visibleProjects,
+      AVAILABLE_FOR_WORK,
+      SELF_DESCRIPTION_PARAGRAPHS,
+      CURRENT_STATUS,
+    };
   },
-};
+});
 </script>
 
 <style></style>

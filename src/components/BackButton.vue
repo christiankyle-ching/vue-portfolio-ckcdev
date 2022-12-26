@@ -4,20 +4,27 @@
   </button>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
+import { useRouter } from "vue-router";
 import ArrowLeftIcon from "./icons/ArrowLeftIcon.vue";
 
-export default {
-  props: ["toPath"],
-  components: { ArrowLeftIcon },
-  methods: {
-    goBack() {
+export default defineComponent({
+  setup() {
+    const router = useRouter();
+
+    const goBack = () => {
       if (window.history.state.back) {
-        this.$router.go(-1);
+        router.go(-1);
       } else {
-        this.$router.replace({ name: "home" });
+        router.replace({ name: "home" });
       }
-    },
+    };
+
+    return {
+      goBack,
+    };
   },
-};
+  components: { ArrowLeftIcon },
+});
 </script>

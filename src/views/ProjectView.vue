@@ -1,16 +1,16 @@
 <template>
   <div class="relative">
-    <BackButton :toPath="{ name: 'home' }" />
+    <BackButton />
 
     <div v-if="project" class="grid grid-cols-1 lg:grid-cols-2 gap-2">
-      <div class="card bg-_teal text-white active col-span-full">
+      <div class="card bg-_teal text-slate-50 active col-span-full">
         <header>
           <h1 class="text-center">{{ project.title }}</h1>
         </header>
         <ProjectImages v-if="showImages" :project="project" />
         <div v-else>
           <video
-            :src="project.videos[0].url"
+            :src="project.media[0].url"
             class="h-[50vh] m-auto rounded-3xl border-4 border-_dark-teal bg-white"
             autoplay
             muted
@@ -27,7 +27,7 @@
         </footer>
       </div>
 
-      <section id="description" class="card bg-_teal text-white">
+      <section id="description" class="card bg-_teal text-slate-50">
         <div>
           <h2>Description</h2>
           <p v-for="p in project.descriptionParagraphs" class="mt-2">
@@ -36,7 +36,7 @@
         </div>
       </section>
 
-      <section id="features" class="card bg-_teal text-white">
+      <section id="features" class="card bg-_teal text-slate-50">
         <div>
           <h2>Features</h2>
           <ul class="list-disc pl-4">
@@ -48,9 +48,9 @@
       </section>
 
       <section
-        v-if="!showImages && !!project.images"
+        v-if="!showImages && !!project.media"
         id="more-images"
-        class="card bg-_teal text-white col-span-full"
+        class="card bg-_teal text-slate-50 col-span-full"
       >
         <header>
           <h2 class="text-center">Screenshots</h2>
@@ -74,7 +74,7 @@
               link.label ? link.label : link.site
             }}</span>
           </a>
-          <button @click="share" class="button flex-grow justify-center">
+          <button @click="handleShare" class="button flex-grow justify-center">
             <ShareIcon />
             <span>Share</span>
           </button>
@@ -84,8 +84,9 @@
   </div>
 </template>
 
-<script>
-import { getProjectByID } from "../assets/projects";
+<script lang="ts">
+import { defineComponent, onMounted, ref, computed } from "vue";
+import { type Project, getProjectByID } from "../assets/projects";
 import LoopingAnimator from "../components/LoopingAnimator.vue";
 import ArrowDownIcon from "../components/icons/ArrowDownIcon.vue";
 import ProjectIcon from "../components/ProjectIcon.vue";
@@ -93,21 +94,59 @@ import ArrowRightIcon from "../components/icons/ArrowRightIcon.vue";
 import ArrowLeftIcon from "../components/icons/ArrowLeftIcon.vue";
 import ShareIcon from "../components/icons/ShareIcon.vue";
 import BackButton from "../components/BackButton.vue";
-import ProjectImages from "../components/ProjectImages.vue";
+import ProjectImages from "../components/ProjectGallery.vue";
 import { nextTick } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
-export default {
-  data() {
-    return {
-      project: null,
-    };
-  },
-  methods: {
-    async share() {
+export default defineComponent({
+  setup() {
+    const route = useRoute();
+    const router = useRouter();
+    const project = ref<Project | null>(null);
+
+    onMounted(() => {
+      nextTick(() => {
+        project.value = getProjectByID(String(route.params.id));
+
+        if (!project.value) {
+          router.push({ name: "NotFound" });
+          return;
+        }
+
+        // === Set Title ===
+        document.title = `${project.value.title} - ${document.title}`;
+
+        // === Set Open Graph Tags ===
+        const ogImage = document.head.querySelector<HTMLMetaElement>(
+          "meta[property='og:image']"
+        );
+        const ogTitle = document.head.querySelector<HTMLMetaElement>(
+          "meta[property='og:title']"
+        );
+        const ogDescription = document.head.querySelector<HTMLMetaElement>(
+          "meta[property='og:description']"
+        );
+
+        if (!!ogImage)
+          ogImage.content = `/static/images/projects/${project.value.id}.jpg`;
+        if (!!ogTitle) ogTitle.content = project.value.title ?? "";
+        if (!!ogDescription)
+          ogDescription.content = project.value.descriptionParagraphs[0] ?? "";
+      });
+    });
+
+    /** Show images if there are no videos */
+    const showImages = computed(
+      () => !project.value?.media.filter((media) => media.isVideo).length
+    );
+
+    const handleShare = async () => {
+      if (!project.value) return;
+
       const data = {
         url: window.location.href,
-        title: this.project.title,
-        text: `${this.project.title} - Project of Christian Kyle Ching`,
+        title: project.value.title,
+        text: `${project.value.title} - Project of Christian Kyle Ching`,
       };
 
       try {
@@ -124,36 +163,13 @@ export default {
           throw e;
         }
       }
-    },
-  },
-  mounted() {
-    this.project = getProjectByID(this.$route.params.id);
+    };
 
-    if (!this.project) this.$router.push({ name: "NotFound" });
-
-    nextTick(() => {
-      // Set Title
-      document.title = `${this.project.title} - ${document.title}`;
-
-      // Set Open Graph Tags
-      // og:image
-      document.querySelector(
-        "head > meta[property='og:image']"
-      ).content = `/static/images/projects/${this.project.id}.jpg`;
-
-      // og:title
-      document.querySelector("head > meta[property='og:title']").content =
-        this.project.title ?? "";
-
-      // og:description
-      document.querySelector("head > meta[property='og:description']").content =
-        this.project.descriptionParagraphs[0] ?? "";
-    });
-  },
-  computed: {
-    showImages() {
-      return !this.project.videos.length;
-    },
+    return {
+      project,
+      showImages,
+      handleShare,
+    };
   },
   components: {
     LoopingAnimator,
@@ -165,5 +181,5 @@ export default {
     BackButton,
     ProjectImages,
   },
-};
+});
 </script>

@@ -15,18 +15,17 @@
         },
       }"
       :space-between="30"
-      pagination
       :free-mode="{ enabled: true, sticky: false, momentum: true }"
       :autoplay="{
-        enabled: true,
         pauseOnMouseEnter: true,
         disableOnInteraction: false,
       }"
+      pagination
       navigation
       loop
       class="h-[50vh] w-full"
     >
-      <SwiperSlide v-for="image in project.images">
+      <SwiperSlide v-for="image in project.media">
         <a
           :href="image.url"
           target="_blank"
@@ -58,61 +57,19 @@
   </div>
 </template>
 
-<script>
-import LoopingAnimator from "./LoopingAnimator.vue";
-import { nextTick } from "@vue/runtime-core";
-
-import { Swiper, SwiperSlide } from "swiper/vue";
-import SwiperCore, { Pagination, FreeMode, Autoplay, Navigation } from "swiper";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/free-mode";
-import "swiper/css/autoplay";
-import "swiper/css/navigation";
-
-// Swiper Modules
-SwiperCore.use([Pagination, FreeMode, Autoplay, Navigation]);
-
-export default {
-  props: {
-    project: {
-      required: true,
-    },
-  },
-  components: {
-    LoopingAnimator,
-
-    SwiperSlide,
-    Swiper,
-  },
-  mounted() {},
-  methods: {
-    onInitSwiper(e) {
-      e.navigation.update();
-      // SwiperJS not using value of navigation.enabled on init
-      // https://github.com/nolimits4web/swiper/issues/4052
-      nextTick(() => {
-        if (window.innerWidth >= 768) {
-          e.navigation.enable();
-        } else {
-          e.navigation.disable();
-        }
-      });
-    },
-  },
-};
-</script>
-
 <style>
-.swiper-pagination-bullet-active {
-  @apply !bg-_dark-teal;
+.swiper-pagination-bullet {
+  @apply !bg-slate-50;
 }
 
 /* Custom Swiper Next and Prev Buttons */
 .swiper-button-prev,
 .swiper-button-next {
   @apply w-12 h-12  rounded-full flex shadow-md;
-  @apply bg-_yellow hover:bg-_teal  text-_teal hover:text-_yellow transition-colors;
+  @apply text-slate-50 hover:text-_teal  bg-_teal hover:bg-slate-50 transition-colors;
+
+  /* Manually hide buttons on mobile */
+  @apply hidden md:flex;
 }
 
 .swiper-button-prev {
@@ -128,3 +85,41 @@ export default {
   @apply drop-shadow-md text-2xl font-black m-auto;
 }
 </style>
+
+<script lang="ts">
+import { defineComponent, type PropType, nextTick } from "vue";
+import LoopingAnimator from "./LoopingAnimator.vue";
+// Swiper imports
+import { Swiper, SwiperSlide } from "swiper/vue";
+import SwiperCore, { Pagination, FreeMode, Autoplay, Navigation } from "swiper";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/free-mode";
+import "swiper/css/autoplay";
+import "swiper/css/navigation";
+import type { Project } from "../assets/projects";
+
+// Swiper Modules
+SwiperCore.use([Pagination, FreeMode, Autoplay, Navigation]);
+
+export default defineComponent({
+  props: {
+    project: {
+      type: Object as PropType<Project>,
+      required: true,
+    },
+  },
+  components: {
+    LoopingAnimator,
+
+    SwiperSlide,
+    Swiper,
+  },
+  mounted() {},
+  methods: {
+    onInitSwiper(e: SwiperCore) {
+      e.navigation.update();
+    },
+  },
+});
+</script>

@@ -10,7 +10,7 @@
 
     <div class="card__background flex relative">
       <img
-        :src="project.images[1].url"
+        :src="project.media[1].url"
         alt=""
         class="absolute top-0 left-0 w-full h-full object-cover object-center opacity-30"
       />
@@ -31,15 +31,19 @@
   </RouterLink>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent, type PropType } from "vue";
 import LoopingAnimator from "./LoopingAnimator.vue";
 import ArrowRightIcon from "./icons/ArrowRightIcon.vue";
-export default {
+import type { Project } from "@/assets/projects";
+
+export default defineComponent({
   props: {
     project: {
+      type: Object as PropType<Project>,
       required: true,
     },
   },
   components: { LoopingAnimator, ArrowRightIcon },
-};
+});
 </script>

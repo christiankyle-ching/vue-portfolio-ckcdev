@@ -13,20 +13,21 @@
   </span>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 import GithubIcon from "./icons/GithubIcon.vue";
 import ExternalLink from "./icons/ExternalLink.vue";
 import DownloadIcon from "./icons/DownloadIcon.vue";
 
-export default {
+export default defineComponent({
   props: {
     site: {
-      required: true,
       type: String,
+      required: true,
     },
   },
   components: { GithubIcon, ExternalLink, DownloadIcon },
-};
+});
 </script>
 
 <style></style>

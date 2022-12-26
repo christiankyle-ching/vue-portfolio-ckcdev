@@ -1,10 +1,10 @@
 import { ACTIVE_PROJECTS } from "./assets/projects";
 
-const projectURLs = ACTIVE_PROJECTS.map(
+const projectURLs: string[] = ACTIVE_PROJECTS.map(
   (p) => `https://ckcdev.vercel.app/project/${p.id}`
 );
 
-const sitemap = [
+const sitemap: string[] = [
   "https://ckcdev.vercel.app/",
 
   // Projects
