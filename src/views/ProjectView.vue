@@ -127,10 +127,10 @@ export default defineComponent({
           "meta[property='og:description']"
         );
 
-        if (!!ogImage)
+        if (ogImage)
           ogImage.content = `/static/images/projects/${project.value.id}.jpg`;
-        if (!!ogTitle) ogTitle.content = project.value.title ?? "";
-        if (!!ogDescription)
+        if (ogTitle) ogTitle.content = project.value.title ?? "";
+        if (ogDescription)
           ogDescription.content = project.value.descriptionParagraphs[0] ?? "";
       });
     });

@@ -7,7 +7,7 @@ ${makeHTMLLink("Dynameyes", "https://www.linkedin.com/company/dynameyes/")}
 
 const AVAILABLE_FOR_WORK: boolean = false;
 
-let SELF_DESCRIPTION_PARAGRAPHS: string[] = [
+const SELF_DESCRIPTION_PARAGRAPHS: string[] = [
   `
   A Software Engineer ${createHTMLElement("strong", {
     innerHTML: "focused in Web development",

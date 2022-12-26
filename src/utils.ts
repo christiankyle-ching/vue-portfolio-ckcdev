@@ -71,7 +71,7 @@ export const animateOnScroll = (
     // Limit upper
     percentage = percentage < 1 ? percentage : 1;
 
-    let transforms = [];
+    const transforms = [];
     if (options.transformScale) transforms.push(`scale(${percentage})`);
     if (options.transformRotate)
       transforms.push(`rotate(${percentage * 365}deg)`);
@@ -114,17 +114,17 @@ export const createHTMLElement = <K extends keyof HTMLElementTagNameMap>(
 ): string => {
   const element = document.createElement(tag);
 
-  if (!!extraOptions?.attributes) {
+  if (extraOptions?.attributes) {
     for (const key in Object.keys(extraOptions.attributes)) {
       const _key = key as keyof typeof element;
       const value = extraOptions.attributes[_key];
-      if (!!value) {
+      if (value) {
         element[_key] = value!;
       }
     }
   }
 
-  if (!!extraOptions?.innerHTML) {
+  if (extraOptions?.innerHTML) {
     element.innerHTML = extraOptions.innerHTML;
   }
 
