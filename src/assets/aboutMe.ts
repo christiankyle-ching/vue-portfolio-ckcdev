@@ -2,7 +2,7 @@ import { makeHTMLLink } from "../utils";
 
 const CURRENT_STATUS: string = `
 Software Engineer at
-${makeHTMLLink("Dynameyes", "https://www.linkedin.com/company/dynameyes/")}"
+${makeHTMLLink("Dynameyes", "https://www.linkedin.com/company/dynameyes/")}
 `;
 
 const AVAILABLE_FOR_WORK: boolean = false;
