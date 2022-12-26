@@ -89,9 +89,46 @@ export const makeHTMLLink = (
   link: string,
   openInNewTab = true
 ) => {
-  return `<a href="${link}" ${
-    openInNewTab ? `target="_blank"` : ``
-  }>${text}</a>`;
+  return createHTMLElement("a", {
+    attributes: {
+      href: link,
+      target: openInNewTab ? "_blank" : "",
+    },
+    innerHTML: text,
+  });
+};
+
+export type CreateHTMLElementExtraOptions<
+  K extends keyof HTMLElementTagNameMap
+> = {
+  attributes: Partial<HTMLElementTagNameMap[K]>;
+  innerHTML: string;
+};
+
+/**
+ * Creates an HTML DOM element and returns its string HTML counterpart.
+ */
+export const createHTMLElement = <K extends keyof HTMLElementTagNameMap>(
+  tag: K,
+  extraOptions?: Partial<CreateHTMLElementExtraOptions<K>>
+): string => {
+  const element = document.createElement(tag);
+
+  if (!!extraOptions?.attributes) {
+    for (const key in Object.keys(extraOptions.attributes)) {
+      const _key = key as keyof typeof element;
+      const value = extraOptions.attributes[_key];
+      if (!!value) {
+        element[_key] = value!;
+      }
+    }
+  }
+
+  if (!!extraOptions?.innerHTML) {
+    element.innerHTML = extraOptions.innerHTML;
+  }
+
+  return element.outerHTML;
 };
 
 export const getHTMLMetaElement = (metaName: string) => {

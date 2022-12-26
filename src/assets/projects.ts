@@ -104,6 +104,7 @@ import img_johnRuthWedding_map from "@/assets/images/projects/john-ruth-wedding/
 import img_johnRuthWedding_response from "@/assets/images/projects/john-ruth-wedding/response.png";
 import img_johnRuthWedding_settings from "@/assets/images/projects/john-ruth-wedding/settings.png";
 import img_johnRuthWedding_verification from "@/assets/images/projects/john-ruth-wedding/verification.png";
+import { makeHTMLLink } from "@/utils";
 //#endregion
 
 // #region Type Definitions
@@ -375,7 +376,11 @@ const PROJECTS: Project[] = [
     descriptionParagraphs: [
       "This web application is inspired to meet the demands of a famous online food store in the Philippines that appeals to the market using the FOMO strategy. They sell food products such as Milk Tea and Rice Meals online, but with a catch! They only pick the earliest people that enlists for a batch of orders and limits it to gain popularity and make customers curious to what they offer. This proved to be working as a business model, and I decided to make a real-time updating web application that caters this business flow, from reservation, ordering, and payment, as a challenge to myself in web development.",
       "I used Vue.JS 3 framework for building the front-end, Firebase for the backend, and Netlify Functions for reacting to web hooks for the payment using Paymongo.",
-      'If you are interested in testing it, here are the <a href=url: "https://docs.google.com/document/d/1eSZ2GrIvIkwLBvSkPuOp87g1EHIlQ1M_Zo3GwCv4GOw/edit?usp=sharing">testing notes</a>.',
+      `If you are interested in testing it, here are the
+      ${makeHTMLLink(
+        "testing notes",
+        "https://docs.google.com/document/d/1eSZ2GrIvIkwLBvSkPuOp87g1EHIlQ1M_Zo3GwCv4GOw/edit?usp=sharing"
+      )}.`,
     ],
     features: [
       "Real-time application updates (no web page reloads)",

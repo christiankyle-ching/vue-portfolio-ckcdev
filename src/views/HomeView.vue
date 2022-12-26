@@ -212,11 +212,15 @@
           </h2>
 
           <!-- Current Status -->
-          <p v-html="CURRENT_STATUS" class="text-center"></p>
+          <p v-html="CURRENT_STATUS" class="text-center text-sm"></p>
         </div>
 
         <!-- Description paragraphs -->
-        <p v-for="p in SELF_DESCRIPTION_PARAGRAPHS" v-html="p"></p>
+        <p
+          v-for="p in SELF_DESCRIPTION_PARAGRAPHS"
+          v-html="p"
+          class="text-left md:text-center"
+        ></p>
 
         <a
           v-if="AVAILABLE_FOR_WORK"
