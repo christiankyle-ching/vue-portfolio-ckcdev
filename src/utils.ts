@@ -115,9 +115,10 @@ export const createHTMLElement = <K extends keyof HTMLElementTagNameMap>(
   const element = document.createElement(tag);
 
   if (extraOptions?.attributes) {
-    for (const key in Object.keys(extraOptions.attributes)) {
-      const _key = key as keyof typeof element;
+    for (const key of Object.keys(extraOptions.attributes)) {
+      const _key = key as keyof typeof element; // cast to keyof created element for compatibility
       const value = extraOptions.attributes[_key];
+
       if (value) {
         element[_key] = value!;
       }
@@ -127,6 +128,8 @@ export const createHTMLElement = <K extends keyof HTMLElementTagNameMap>(
   if (extraOptions?.innerHTML) {
     element.innerHTML = extraOptions.innerHTML;
   }
+
+  console.log(element);
 
   return element.outerHTML;
 };

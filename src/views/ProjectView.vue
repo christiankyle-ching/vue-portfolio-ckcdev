@@ -70,7 +70,7 @@
             class="button flex-grow justify-center"
           >
             <ProjectIcon :site="link.site" />
-            <span class="capitalize">{{
+            <span class="capitalize text-center">{{
               link.label ? link.label : link.site
             }}</span>
           </a>
